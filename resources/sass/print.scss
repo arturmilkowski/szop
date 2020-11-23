@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata&display=swap");
+
+body {
+    font-family: "Inconsolata", monospace;
+    font-size: 11pt;
+}
+
+div.break {
+    display: block;
+    width: 100%;
+    clear: both;
+    color: white;
+}
+
+.mt {
+    margin-top: 5em;
+}
+
+div.dealer {
+    float: left;
+}
+
+div.buyer {
+    float: right;
+}
+
+div.dealer, div.buyer {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 1rem;
+    border-top: 2px solid #5c5c5c;
+    border-bottom: 1px solid #5c5c5c;
+}
+
+div.dealer div, div.buyer div {
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+div.text-center {
+    text-align: center;
+}
+
+div.items table {
+    width: 100%;
+}
+div.items table tbody tr td {
+    border-bottom: 1px solid #5c5c5c;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+}
+div.items table tbody tr td.text-right {
+    text-align: right;
+}
+div.items table tbody tr td.last {
+    border-bottom: 2px solid #5c5c5c;
+}

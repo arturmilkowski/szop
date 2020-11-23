@@ -1,0 +1,127 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono|Inconsolata&display=swap");
+
+// Variables
+@import "variables";
+
+// Your variable overrides
+$border-radius: 0;
+$primary: #601057;
+// $my-primary: #601057;
+$body-color: #495057;
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+$my-gray: $gray-600;
+
+/*
+.btn-outline-primary {
+    color: $my-primary;
+    border-color: $my-primary;
+}
+*/
+
+body {
+    font-family: "Inconsolata", monospace;
+}
+
+.card-img-top {
+    background-color: #FFF205;
+}
+
+.navbar-brand {
+    margin-right: 2rem;
+}
+a.navbar-brand:hover {
+    background-color: #FFF205;
+    -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.navbar-brand,
+div.container-fluid {
+    font-family: "Inconsolata", monospace;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+}
+
+.my-jumbo {
+    /*outline: 1px solid black;*/
+    background-color: transparent; /* #f7fafd;*/
+    padding: 1rem 1rem;
+    border-top: 1px dashed $gray-300;
+    border-bottom: 1px dashed $gray-300;
+    color: $gray-600;
+}
+
+.my-card {
+    border: 0;
+    border-top: 1px solid $my-gray;
+    border-bottom: 0;
+}
+/*
+.my-card img {
+    padding-bottom: 1rem;
+}
+.my-card .card-body {
+    padding-left: 0;
+    padding-right: 0;
+}
+*/
+
+.card-footer {
+    background-color: #FFFFFF;
+}
+
+.my-post-card {
+    /* border: 1px solid rgba(0, 0, 0, 0.09); */
+    border: 0;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+.my-post-card .card-footer {
+    border: 0;
+}
+
+.card-img-top:hover {
+    mix-blend-mode: luminosity;
+}
+
+.product-name,
+.product-price {
+    font-family: "IBM Plex Mono", "Inconsolata", monospace;
+}
+
+.alert {
+    border: 0;
+}
+
+address {
+    font-size: 2rem;
+}
+
+footer {
+    font-size: 80%;
+    margin-top: 2rem;
+}
+footer div {
+    border-top: 1px dotted $gray-300;
+    padding-top: 0.5rem;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 1px rgba(96, 16, 87, 0.25);
+}
+
+/* anti-spam */
+
+.unwanted {
+    visibility: hidden;
+}
