@@ -26,6 +26,7 @@ class Index extends Controller
      */
     public function __invoke(Basket $basket): View
     {
+        /*
         $posts = Cache::remember(
             'latest_posts',
             self::SECONDS,
@@ -41,14 +42,14 @@ class Index extends Controller
             self::SECONDS,
             function () {
                 return Product::getActive();
-                /*
-                Product::with(['concentration', 'category'])
-                    ->where('hide', 0)
-                    ->latest()
-                    ->get();
-                */
             }
         );
+        */
+        $posts = Post::published()
+            ->latest()
+            ->take(4)
+            ->get();           
+        $products = Product::getActive();
         $currentRouteName = 'frontend.pages.index';
 
         return view(

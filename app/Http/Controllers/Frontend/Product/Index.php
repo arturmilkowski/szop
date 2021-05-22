@@ -23,18 +23,16 @@ class Index extends Controller
      */
     public function __invoke(Basket $basket): View
     {
+        /*
         $products = Cache::remember(
             'latest_products',
             self::SECONDS,
             function () {
                 return Product::getActive();
-                /*
-                return Product::with(
-                    ['concentration', 'category', 'reviews']
-                )->latest()->get();
-                */
             }
         );
+        */
+        $products = Product::getActive();
         $currentRouteName = 'frontend.product';
 
         return view(
