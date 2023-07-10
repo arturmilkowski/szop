@@ -31,18 +31,18 @@ class SaleDocumentTest extends TestCase
         ]);
     }
 
-    // public function testDocumentHasManyOrders(): void
-    // {
-    //     $saleDocument = SaleDocument::factory()
-    //         ->has(
-    //             Order::factory()
-    //                 ->for(
-    //                     Status::factory()
-    //                 )
-    //                 ->for(Customer::factory(), 'orderable')
-    //         )
-    //         ->create();
+    public function testDocumentHasManyOrders(): void
+    {
+        $saleDocument = SaleDocument::factory()
+            ->has(
+                Order::factory()
+                    ->for(
+                        Status::factory()
+                    )
+                    ->for(Customer::factory(), 'orderable')
+            )
+            ->create();
 
-    //     $this->assertInstanceOf(Collection::class, $saleDocument->orders);
-    // }
+        $this->assertInstanceOf(Collection::class, $saleDocument->orders);
+    }
 }

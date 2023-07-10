@@ -20,7 +20,6 @@ class ItemTest extends TestCase
         $this->assertInstanceOf(Item::class, $item);
     }
 
-    /*
     public function testCreateOrderItem()
     {
         $this->withoutExceptionHandling();
@@ -59,5 +58,4 @@ class ItemTest extends TestCase
 
         $this->assertInstanceOf(Order::class, $item->order);
     }
-    */
 }

@@ -20,7 +20,6 @@ class OrderTest extends TestCase
         $this->assertInstanceOf(Order::class, $order);
     }
 
-    /*
     public function testCreateOrder(): void
     {
         $status = Status::factory()->create();
@@ -91,7 +90,6 @@ class OrderTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $order->items);
     }
-    */
 
     /*
     public function testOrderCanSaveItems(): void

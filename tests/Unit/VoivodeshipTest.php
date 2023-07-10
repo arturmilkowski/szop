@@ -28,19 +28,21 @@ class VoivodeshipTest extends TestCase
         $this->assertDatabaseHas('voivodeships', ['name' => $voivodeship->name]);
     }
 
-    // public function testVoivodeshipHasManyCustomers(): void
-    // {
-    //     $voivodeship = Voivodeship::factory()->has(Customer::factory())->create();
+    public function testVoivodeshipHasManyCustomers(): void
+    {
+        $voivodeship = Voivodeship::factory()->has(Customer::factory())->create();
 
-    //     $this->assertInstanceOf(Collection::class, $voivodeship->customers);
-    // }
+        $this->assertInstanceOf(Collection::class, $voivodeship->customers);
+    }
 
-    // public function testVoivodeshipHasManyProfiles(): void
-    // {
-    //     $voivodeship = Voivodeship::factory()
-    //         ->has(Profile::factory()->for(User::factory()))
-    //         ->create();
+    /*
+    public function testVoivodeshipHasManyProfiles(): void
+    {
+        $voivodeship = Voivodeship::factory()
+            ->has(Profile::factory()->for(User::factory()))
+            ->create();
 
-    //     $this->assertInstanceOf(Collection::class, $voivodeship->profiles);
-    // }
+        $this->assertInstanceOf(Collection::class, $voivodeship->profiles);
+    }
+    */
 }

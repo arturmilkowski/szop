@@ -31,7 +31,6 @@ class StatusTest extends TestCase
         ]);
     }
 
-    /*
     public function testStatusHasManyOrders(): void
     {
         $status = Status::factory()
@@ -44,5 +43,4 @@ class StatusTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $status->orders);
     }
-    */
 }
