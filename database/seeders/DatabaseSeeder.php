@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        
         $this->call([
             BrandSeeder::class,
             CategorySeeder::class,
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             CommentSeeder::class,
             ReplySeeder::class,
+            VoivodeshipSeeder::class,
         ]);
     }
 }
