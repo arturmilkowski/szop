@@ -32,7 +32,9 @@ class DatabaseSeeder extends Seeder
             VoivodeshipSeeder::class,
             SaleDocumentSeeder::class,
             StatusSeeder::class,
-            // DeliveryAddressSeeder::class,
+            UserSeeder::class,
+            ProfileSeeder::class,
+            DeliveryAddressSeeder::class,
             CustomerSeeder::class,
             OrderSeeder::class,
         ]);
