@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasOne, MorphMany};
+use App\Models\Order\Order;
+use App\Models\User\Profile;
 
 class User extends Authenticatable
 {
@@ -42,4 +45,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function orders(): MorphMany
+    {
+        return $this->morphMany(Order::class, 'orderable');
+    }
 }
