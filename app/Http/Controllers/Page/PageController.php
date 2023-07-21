@@ -3,26 +3,20 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Product\Product;
+use App\Services\Cart;
 
 class PageController extends Controller
 {
-    public function index(): View // Cart $cart
+    public function index(Cart $cart): View
     {
         $products = Product::all();
 
-        return view('page.page.index', ['products' => $products]);
-        /*
-        return view(
-            'page.page.index',
-            [
-                'products' => $products,
-                'cart' => $cart,
-            ]
-        );
-        */
+        return view('page.page.index', [
+            'products' => $products,
+            'cart' => $cart
+        ]);        
     }
 
     public function about(): View

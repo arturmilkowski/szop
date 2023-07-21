@@ -1,6 +1,8 @@
   <x-layout>
     <x-slot:title>{{ $product->name }}</x-slot>
-
+@if ($cart->itemsCount())
+    <x-cart :cart="$cart" />
+@endif
     <h1>{{ $product->name }}</h1>
     <h2>{{ $product->category->name }} {{ $product->concentration->name }}</h2>
     <img src="{{ asset('storage/images/products') . '/' . $product->img }}" class="img" alt="{{ $product->name }}">
@@ -10,7 +12,7 @@
     <p>{{ $type->description }}</p>
 @endif
 @if ($type->quantity > 0)
-    <form action="{{-- route('cart.store', [$type->id]) --}}" method="POST">
+    <form action="{{ route('cart.store', [$type->id]) }}" method="POST">
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
       <button type="submit">Do koszyka</button>
     </form>

@@ -1,5 +1,8 @@
   <x-layout>
     <x-slot:title>Produkty</x-slot>
+@if ($cart->itemsCount())
+    <x-cart :cart="$cart" />
+@endif
     <h1>Produkty</h1>
 @forelse ($products as $product)
     <div class="product">

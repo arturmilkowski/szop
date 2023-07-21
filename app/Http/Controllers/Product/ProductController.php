@@ -3,21 +3,27 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Product\Product;
+use App\Services\Cart;
 
 class ProductController extends Controller
 {
-    public function index(): View
+    public function index(Cart $cart): View
     {
         $products = Product::all();
 
-        return view('product.index', ['products' => $products,]);
+        return view('product.index', [
+            'products' => $products,
+            'cart' => $cart
+        ]);
     }
 
-    public function show(Product $product): View
+    public function show(Cart $cart, Product $product): View
     {
-        return view('product.show', ['product' => $product]);
+        return view('product.show', [
+            'product' => $product,
+            'cart' => $cart
+        ]);
     }
 }
