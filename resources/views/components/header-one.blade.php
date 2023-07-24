@@ -1,0 +1,1 @@
+<h1 class="mx-2 my-4">{{ $slot }}</h1>
