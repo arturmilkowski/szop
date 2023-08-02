@@ -13,7 +13,7 @@
 @guest
         <x-link href="{{ route('login') }}">Zaloguj się i kup</x-link>
         <x-link href="{{ route('register') }}">Załóż konto</x-link>
-        <a href="{{-- route('orders.without-registration.create') --}}">Zamów bez rejestracji</a>
+        <a href="{{ route('orders.without-registration.create') }}">Zamów bez rejestracji</a>
 @endguest
 @auth
         <a href="{{-- route('orders.with-registration.create') --}}">Zamów</a>
