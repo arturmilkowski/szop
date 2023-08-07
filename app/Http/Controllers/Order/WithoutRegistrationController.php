@@ -10,6 +10,7 @@ use App\Http\Requests\Order\StoreWithoutRegisterRequest;
 use App\Models\Order\SaleDocument;
 use App\Models\Customer\Customer;
 use App\Models\Order\{Voivodeship, Order};
+use App\Events\Order\PlacedWithoutRegistration;
 
 class WithoutRegistrationController extends Controller
 {
@@ -58,13 +59,7 @@ class WithoutRegistrationController extends Controller
         $items = $cart->getItems();
         $order->items()->saveMany($items);
 
-        /*
-        event(
-            new OrderPlacedWithoutRegistration(
-                $request, $basket, $savedOrder, $createdCustomer
-            )
-        );
-        */
+        PlacedWithoutRegistration::dispatch($cart, $order, $createdCustomer);
 
         // $cart->clear();
 
