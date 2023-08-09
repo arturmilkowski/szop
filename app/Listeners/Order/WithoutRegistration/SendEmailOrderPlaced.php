@@ -4,8 +4,9 @@ namespace App\Listeners\Order\WithoutRegistration;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 use App\Events\Order\PlacedWithoutRegistration;
-
+use App\Mail\Order\PlacedWithoutRegistration as WithoutRegistrationMail;
 
 class SendEmailOrderPlaced
 {
@@ -23,6 +24,7 @@ class SendEmailOrderPlaced
     {
         // dd($event->customer->email);
         // dd($event->order);
-        // dd($event->cart);        
+        // dd($event->cart);
+        Mail::to($event->customer->email)->send(new WithoutRegistrationMail($event));      
     }
 }

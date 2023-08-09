@@ -22,6 +22,16 @@ class Order extends Model
         'delivery_name',
         'comment'
     ];
+    
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'status_id' => 1,
+        'sale_document_id' => 1,
+    ];
 
     public function orderable(): MorphTo
     {

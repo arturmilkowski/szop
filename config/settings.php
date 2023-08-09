@@ -1,6 +1,15 @@
 <?php
 
 return [
+    'company_name' => 'Protelekom',
+    'company_owner' => 'Artur Miłkowski',
+    'company_address' => [
+        'street' => 'Łukasiewicza 4',
+        'city' => 'Oświęcim',
+        'zip_code' => '32-600',
+        'voivodeship' => 'małopolskie',
+        'phone' => '+48 33 123 45 67',
+    ],
     'currency' => 'zł',
     'delivery' => [
         'polish_post_office' => [
@@ -20,4 +29,5 @@ return [
         ],
         'methods_of_payment' => ['prepayment' => 'Przedpłata na konto']
     ],
+    'account_number' => '12345678901234567890',
 ];

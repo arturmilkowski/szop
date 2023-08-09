@@ -55,11 +55,11 @@ class WithoutRegistrationController extends Controller
         $order->delivery_name = config('settings.delivery.polish_post_office.name');
         $order->sale_document_id = $request->sale_document_id;
         $order->comment = $request->input('comment');
-        $createdCustomer->order()->save($order);
+        $savedOrder = $createdCustomer->order()->save($order);
         $items = $cart->getItems();
-        $order->items()->saveMany($items);
-
-        PlacedWithoutRegistration::dispatch($cart, $order, $createdCustomer);
+        $savedOrder->items()->saveMany($items);
+        
+        PlacedWithoutRegistration::dispatch($cart, $savedOrder, $createdCustomer);
 
         // $cart->clear();
 
