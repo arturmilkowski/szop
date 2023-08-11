@@ -63,6 +63,6 @@ class WithoutRegistrationController extends Controller
 
         // $cart->clear();
 
-        // return redirect()->route('orders.thank-without-registration');
+        return redirect()->route('orders.thank.without-registration');
     }
 }
