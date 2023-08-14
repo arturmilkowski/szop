@@ -10,6 +10,7 @@ use App\Http\Controllers\Cart\{
     RemoveAllController as CartRemoveAllController
 };
 use App\Http\Controllers\Order\{CheckoutController, WithoutRegistrationController};
+use App\Http\Controllers\Backend\User\DashboardController;
 
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
@@ -30,9 +31,8 @@ Route::post('/wyslij-zamowienie-bez-rejestracji', [WithoutRegistrationController
 Route::view('/welcome', 'order.thank.without-registration')->name('orders.thank.without-registration');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () { return view('dashboard'); })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
