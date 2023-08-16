@@ -9,7 +9,7 @@ use App\Http\Controllers\Cart\{
     DestroyController as CartDestroyController,
     RemoveAllController as CartRemoveAllController
 };
-use App\Http\Controllers\Order\{CheckoutController, WithoutRegistrationController};
+use App\Http\Controllers\Order\{CheckoutController, WithoutRegistrationController, WithRegistrationController};
 use App\Http\Controllers\Backend\User\DashboardController;
 
 
@@ -32,7 +32,11 @@ Route::view('/welcome', 'order.thank.without-registration')->name('orders.thank.
 
 
 // Route::get('/dashboard', function () { return view('dashboard'); })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/zamow', [WithRegistrationController::class, 'create'])->name('orders.with-registration.create');
+    Route::post('/wyslij-zamowienie', [WithRegistrationController::class, 'store'])->name('orders.with-registration.store');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

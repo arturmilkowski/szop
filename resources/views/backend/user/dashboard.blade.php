@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <p>{{ __("You're logged in!") }}</p>
 @if ($hasCart)
-                    <a href="{{-- route('orders.with-registration.create') --}}" title="">Przejdź do kasy</a>
+                    <a href="{{ route('orders.with-registration.create') }}" title="">Przejdź do kasy</a>
 @endif
                 </div>
             </div>

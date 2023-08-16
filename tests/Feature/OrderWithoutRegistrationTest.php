@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 // use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 use App\Models\Product\{Brand, Category, Concentration, Product, Size, Type};
 
 class OrderWithoutRegistrationTest extends TestCase
@@ -31,6 +32,8 @@ class OrderWithoutRegistrationTest extends TestCase
     public function testCreate(): void
     {
         $this->withoutExceptionHandling();
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
 
         // add product to a basket
         $response = $this->post(route('cart.store', [$this->type]));
