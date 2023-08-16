@@ -10,6 +10,7 @@ use App\Services\Cart;
 use App\Models\Order\SaleDocument;
 use App\Models\Order\Order;
 use App\Http\Requests\Order\StoreWithRegisterRequest;
+use App\Events\Order\PlacedWithRegistration;
 
 class WithRegistrationController extends Controller
 {
@@ -63,13 +64,11 @@ class WithRegistrationController extends Controller
         $order->comment = $validated['comment'];
 
         $user = $request->user();
-        // dd($user);
-        $savedOrder = $user->orders()->save($order);
-        // dd($savedOrder->items());
-        // dd($cart->getItems());
-        $items = $savedOrder->items()->saveMany($cart->getItems());
-        dd($items);
-        // event(new OrderPlacedWithRegistration($request, $basket, $order));
+        $savedOrder = $user->orders()->save($order);        
+        $items = $cart->getItems();
+        $savedOrder->items()->saveMany($items);
+
+        PlacedWithRegistration::dispatch($cart, $savedOrder);
         // $cart->clear();
 
         // return redirect()->route('orders.thank-with-registration');
