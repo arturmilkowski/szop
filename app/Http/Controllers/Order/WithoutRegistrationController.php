@@ -39,7 +39,7 @@ class WithoutRegistrationController extends Controller
         ]);
     }
 
-    public function store(StoreWithoutRegisterRequest $request, Cart $cart)//: RedirectResponse
+    public function store(StoreWithoutRegisterRequest $request, Cart $cart): RedirectResponse | View
     {
         $validated = $request->validated();
 

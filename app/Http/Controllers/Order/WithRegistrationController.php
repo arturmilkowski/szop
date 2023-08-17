@@ -17,7 +17,7 @@ class WithRegistrationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request, Cart $cart): View
+    public function create(Request $request, Cart $cart): RedirectResponse | View
     {
         if ($cart->isEmpty()) {
             return redirect()->route('pages.index');
@@ -45,7 +45,7 @@ class WithRegistrationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreWithRegisterRequest $request, Cart $cart)//: RedirectResponse | View
+    public function store(StoreWithRegisterRequest $request, Cart $cart): RedirectResponse | View
     {
         if ($cart->isEmpty()) {
             return redirect()->route('pages.index');
@@ -69,8 +69,8 @@ class WithRegistrationController extends Controller
         $savedOrder->items()->saveMany($items);
 
         PlacedWithRegistration::dispatch($cart, $savedOrder);
-        // $cart->clear();
+        $cart->clear();
 
-        // return redirect()->route('orders.thank-with-registration');
+        return redirect()->route('orders.thank.with-registration');
     }
 }
