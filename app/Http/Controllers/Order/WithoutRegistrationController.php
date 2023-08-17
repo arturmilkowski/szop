@@ -60,8 +60,7 @@ class WithoutRegistrationController extends Controller
         $savedOrder->items()->saveMany($items);
         
         PlacedWithoutRegistration::dispatch($cart, $savedOrder, $createdCustomer);
-
-        // $cart->clear();
+        $cart->clear();
 
         return redirect()->route('orders.thank.without-registration');
     }

@@ -1,4 +1,4 @@
-Zamówienie (bez rejestracji) złożone
+Zamówienie złożone
 
 Identyfikator zamówienia: {{ $event->order->id }} | {{ $event->order->orderable_id }}
 Data zamówienia: {{ $event->order->created_at }}
@@ -18,22 +18,10 @@ Zamówione produkty:
 Cena: {{ $item->price }}
 Ilość: {{ $item->quantity }}
 Wartość: {{ $item->subtotal_price }}
-------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 @endforeach
- 
-Zamawiający:
-{{ $event->customer->name }} {{ $event->customer->lastname }}
-{{ $event->customer->street }}
-{{ $event->customer->zip_code }} {{ $event->customer->city }}
-{{ $event->customer->voivodeship->name }}
-Email: {{ $event->customer->email }}
-@if ($event->customer->phone)
-Telefon: {{ $event->customer->phone }}
-@endif
 
-------------------------------------------------------------------------------
-
-Dokument zakupu: {{ $event->order->saleDocument->display_name }}
+Dokument zakupu: {{ $event->order->saleDocument->name }}
 Do zapłaty: {{ number_format($event->order->total_price_and_delivery_cost, 2) }} zł
 Numer konta: {{ config('settings.account_number') }}
 Sposób zapłaty: {{ config('settings.delivery.methods_of_payment.prepayment') }}

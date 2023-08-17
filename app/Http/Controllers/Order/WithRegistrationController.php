@@ -45,7 +45,7 @@ class WithRegistrationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreWithRegisterRequest $request, Cart $cart)
+    public function store(StoreWithRegisterRequest $request, Cart $cart)//: RedirectResponse | View
     {
         if ($cart->isEmpty()) {
             return redirect()->route('pages.index');

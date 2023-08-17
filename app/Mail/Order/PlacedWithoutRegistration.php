@@ -20,7 +20,6 @@ class PlacedWithoutRegistration extends Mailable
      */
     public function __construct(public Event $event)
     {
-        //
     }
 
     /**

@@ -22,6 +22,6 @@ class SendEmailOrderPlaced
      */
     public function handle(PlacedWithoutRegistration $event): void
     {
-        Mail::to($event->customer->email)->send(new WithoutRegistrationMail($event));      
+        Mail::to($event->customer->email)->send(new WithoutRegistrationMail($event));
     }
 }
