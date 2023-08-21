@@ -15,6 +15,19 @@ class Brand extends Model
         'name'
     ];
 
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function (Brand $brand) {            
+            $brand->slug = str()->slug($brand->name);
+        });
+        static::updating(function (Brand $brand) {            
+            $brand->slug = str()->slug($brand->name);
+        });
+    }
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
