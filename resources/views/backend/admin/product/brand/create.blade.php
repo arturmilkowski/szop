@@ -1,10 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Dodawanie
-        </h2>
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dodawanie</h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -17,7 +14,6 @@
                             <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Pole obowiązkowe" autofocus>
                             @error('name')<div>{{ $message }}</div>@enderror
                         </div>
-                        {{-- <button type="submit">Dodaj</button> --}}
                         <x-primary-button class="mt-4">Dodaj</x-primary-button>
                     </form>
                     <p>
