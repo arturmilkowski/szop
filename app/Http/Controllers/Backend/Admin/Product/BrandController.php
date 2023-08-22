@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Backend\Admin\Product;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Product\Brand;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Http\Requests\Brand\StoreRequest;
-use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
@@ -27,7 +25,6 @@ class BrandController extends Controller
     public function store(StoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();        
-        // $validated['slug'] = Str::slug($validated['name']);
         Brand::create($validated);
         
         return redirect(route('backend.admins.products.brands.index'))->with('message', 'Dodano');

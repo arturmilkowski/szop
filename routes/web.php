@@ -11,7 +11,8 @@ use App\Http\Controllers\Cart\{
 };
 use App\Http\Controllers\Order\{CheckoutController, WithoutRegistrationController, WithRegistrationController};
 use App\Http\Controllers\Backend\User\DashboardController;
-use App\Http\Controllers\Backend\Admin\Product\BrandController;
+use App\Http\Controllers\Backend\Admin\Product\{BrandController, CategoryController};
+
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
 Route::get('/o-firmie', [PageController::class, 'about'])->name('pages.about');
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/wyslij-zamowienie', [WithRegistrationController::class, 'store'])->name('orders.with-registration.store');
 
     Route::resource('/konto/admin/produkty/firmy', BrandController::class)->names('backend.admins.products.brands')->parameters(['firmy' => 'brand']);
+    Route::resource('/konto/admin/produkty/kategorie', CategoryController::class)->names('backend.admins.products.categories')->parameters(['kategorie' => 'category']);
 });
 
 Route::middleware('auth')->group(function () {
