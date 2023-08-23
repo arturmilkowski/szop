@@ -15,6 +15,15 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('backend.admins.products.brands.index')" :active="request()->routeIs('backend.admins.products.brands.index')">
+                        Firmy
+                    </x-nav-link>
+                    <x-nav-link :href="route('backend.admins.products.categories.index')" :active="request()->routeIs('backend.admins.products.categories.index')">
+                        Kategorie
+                    </x-nav-link>
+                    <x-nav-link :href="route('backend.admins.products.concentrations.index')" :active="request()->routeIs('backend.admins.products.concentrations.index')">
+                        Koncentracje
+                    </x-nav-link>
                 </div>
             </div>
 
