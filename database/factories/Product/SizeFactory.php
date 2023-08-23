@@ -18,25 +18,25 @@ class SizeFactory extends Factory
     {
         $product = $this->faker->randomElements([
             [
-                'name' => 'xs',
-                'display_name' => 'Bardzo mały',
+                'slug' => 'xs',
+                'name' => 'Bardzo mały',
                 'description' => 'Bardzo mały produkt',
             ],
             [
-                'name' => 's',
-                'display_name' => 'Mały',
+                'slug' => 's',
+                'name' => 'Mały',
                 'description' => 'Mały produkt',
             ],
             [
-                'name' => 'm',
-                'display_name' => 'Średni',
+                'slug' => 'm',
+                'name' => 'Średni',
                 'description' => 'Średniej wielkości produkt',
             ]
         ])[0];
 
         return [
+            'slug' => $product['slug'],
             'name' => $product['name'],
-            'display_name' => $product['display_name'],
             'description' => $product['description'],
         ];
     }

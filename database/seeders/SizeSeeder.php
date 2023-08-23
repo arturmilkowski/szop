@@ -13,18 +13,18 @@ class SizeSeeder extends Seeder
     public function run(): void
     {
         DB::table('sizes')->insert([
-            'name' => 'xs',
-            'display_name' => 'Bardzo mały',
+            'slug' => 'xs',
+            'name' => 'Bardzo mały',
             'description' => 'Próbka',
         ]);
         DB::table('sizes')->insert([
-            'name' => 's',
-            'display_name' => 'Mały',
+            'slug' => 's',
+            'name' => 'Mały',
             'description' => 'Butelka',
         ]);
         DB::table('sizes')->insert([
-            'name' => 'm',
-            'display_name' => 'Średni',
+            'slug' => 'm',
+            'name' => 'Średni',
             'description' => '',
         ]);
     }

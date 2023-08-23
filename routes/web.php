@@ -11,7 +11,7 @@ use App\Http\Controllers\Cart\{
 };
 use App\Http\Controllers\Order\{CheckoutController, WithoutRegistrationController, WithRegistrationController};
 use App\Http\Controllers\Backend\User\DashboardController;
-use App\Http\Controllers\Backend\Admin\Product\{BrandController, CategoryController, ConcentrationController};
+use App\Http\Controllers\Backend\Admin\Product\{BrandController, CategoryController, ConcentrationController, SizeController};
 
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
@@ -42,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/konto/admin/produkty/firmy', BrandController::class)->names('backend.admins.products.brands')->parameters(['firmy' => 'brand']);
     Route::resource('/konto/admin/produkty/kategorie', CategoryController::class)->names('backend.admins.products.categories')->parameters(['kategorie' => 'category']);
     Route::resource('/konto/admin/produkty/koncentracje', ConcentrationController::class)->names('backend.admins.products.concentrations')->parameters(['koncentracje' => 'concentration']);
+    Route::resource('/konto/admin/produkty/pojemnosci', SizeController::class)->names('backend.admins.products.sizes')->parameters(['pojemnosci' => 'size']);
 });
 
 Route::middleware('auth')->group(function () {

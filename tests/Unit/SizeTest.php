@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
-use App\Models\Product\{Size, Brand};
+use App\Models\Product\Size;
 
 class SizeTest extends TestCase
 {
@@ -25,8 +25,8 @@ class SizeTest extends TestCase
         $this->assertDatabaseHas(
             'sizes',
             [
-                'name' => $size->name,
-                'display_name' => $size->display_name,
+                'slug' => $size->slug,
+                'name' => $size->name,                
             ]
         );
     }
