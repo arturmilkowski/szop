@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product\Brand;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Http\Requests\Brand\StoreRequest;
+use App\Http\Requests\Product\StoreBrandRequest;
 
 class BrandController extends Controller
 {
@@ -22,7 +22,7 @@ class BrandController extends Controller
         return view('backend.admin.product.brand.create');
     }
 
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(StoreBrandRequest $request): RedirectResponse
     {
         $validated = $request->validated();        
         Brand::create($validated);
@@ -40,7 +40,7 @@ class BrandController extends Controller
         return view('backend.admin.product.brand.edit', ['item' => $brand]);
     }
 
-    public function update(StoreRequest $request, Brand $brand): RedirectResponse
+    public function update(StoreBrandRequest $request, Brand $brand): RedirectResponse
     {
         $validated = $request->validated();
         $brand->update($validated);

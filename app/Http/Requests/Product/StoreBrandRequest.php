@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Brand;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreRequest extends FormRequest
+class StoreBrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +23,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:40', 'unique:brands,name'],
+            'name' => ['required', 'max:40'], // 'unique:brands,name' Rule::unique('brands,name')->ignore($this->brand)
             'slug' => [], // ['required', 'max:40', 'unique:brands,slug'],
         ];
     }

@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Backend\Admin\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 use App\Models\Product\Category;
 use App\Http\Requests\Product\StoreCategoryRequest;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
