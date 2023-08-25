@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend\Admin\Product;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Str;

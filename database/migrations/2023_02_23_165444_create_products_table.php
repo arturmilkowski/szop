@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug', 60)->unique();
             $table->string('name', 60)->unique();
             $table->text('description')->nullable();
-            $table->string('img', 60)->nullable();
+            $table->string('img')->nullable();
             $table->string('site_description')->nullable()->comment('sekcja head');
             $table->string('site_keyword')->nullable()->comment('sekcja head');
             $table->boolean('hide')->default(1);
