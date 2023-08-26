@@ -17,6 +17,19 @@
                             <tr>
                                 <x-table-data>#</x-table-data>                                
                                 <x-table-data>{{ $item->id }}</x-table-data>
+                            </tr>
+                            <tr>
+                                <x-table-data>Firma</x-table-data>                                
+                                <x-table-data>{{ $item->brand->name }}</x-table-data>
+                            </tr>
+                            <tr>
+                                <x-table-data>Kategoria</x-table-data>                                
+                                <x-table-data>{{ $item->category->name }}</x-table-data>
+                            </tr>
+                            <tr>
+                                <x-table-data>Koncentracja</x-table-data>
+                                <x-table-data>{{ $item->concentration->name }}</x-table-data>
+                            </tr>
                             <tr>
                                 <x-table-data>Nazwa</x-table-data>
                                 <x-table-data>
@@ -24,6 +37,28 @@
                                         {{ $item->name }}
                                     </a>
                                 </x-table-data>
+                            </tr>
+                            <tr>
+                                <x-table-data>Opis</x-table-data>
+                                <x-table-data>{{ $item->description }}</x-table-data>
+                            </tr>
+                            <tr>
+                                <x-table-data>Obrazek</x-table-data>
+                                <x-table-data>
+                                    <img width="200" src="{{ asset('storage/images/products') . '/' . $item->img }}" alt="{{ $item->name }}">
+                                </x-table-data>
+                            </tr>
+                            <tr>
+                                <x-table-data>Opis w sekcji nagłówkowej strony</x-table-data>
+                                <x-table-data>{{ $item->site_description }}</x-table-data>
+                            </tr>
+                            <tr>
+                                <x-table-data>Słowa kluczowe w sekcji nagłówkowej strony</x-table-data>
+                                <x-table-data>{{ $item->site_keyword }}</x-table-data>
+                            </tr>
+                            <tr>
+                                <x-table-data>Ukryj</x-table-data>
+                                <x-table-data>{{ $item->hide }}</x-table-data>
                             </tr>
                         </tbody>
                     </table>

@@ -28,7 +28,7 @@
                             <label for="category_id">Kategoria</label>
                             <select id="category_id" name="category_id">
 @foreach ($categories as $category)
-@if ( old('category_id') == $brand->id)
+@if ( old('category_id') == $category->id)
                                 <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
 @else
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>

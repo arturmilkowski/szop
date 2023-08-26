@@ -23,16 +23,6 @@ class Product extends Model
         'hide'
     ];
 
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    // public function getRouteKeyName()
-    // {
-    //     return 'slug';
-    // }
-
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
@@ -45,7 +35,7 @@ class Product extends Model
 
     public function concentration(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Concentration::class);
     }
 
     public function types(): HasMany
