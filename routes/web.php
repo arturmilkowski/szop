@@ -12,7 +12,7 @@ use App\Http\Controllers\Cart\{
 use App\Http\Controllers\Order\{CheckoutController, WithoutRegistrationController, WithRegistrationController};
 use App\Http\Controllers\Backend\User\DashboardController;
 use App\Http\Controllers\Backend\Admin\Product\{BrandController, CategoryController, ConcentrationController, SizeController, ProductController as AdminProductController};
-
+use App\Http\Controllers\Backend\Admin\Customer\CustomerController;
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
 Route::get('/o-firmie', [PageController::class, 'about'])->name('pages.about');
@@ -44,6 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/konto/admin/produkty/koncentracje', ConcentrationController::class)->names('backend.admins.products.concentrations')->parameters(['koncentracje' => 'concentration']);
     Route::resource('/konto/admin/produkty/pojemnosci', SizeController::class)->names('backend.admins.products.sizes')->parameters(['pojemnosci' => 'size']);
     Route::resource('/konto/admin/produkty/produkty', AdminProductController::class)->names('backend.admins.products.products')->parameters(['produkty' => 'product']);
+    Route::resource('/konto/admin/klienci', CustomerController::class)->names('backend.admins.customers')->parameters(['klienci' => 'customer']);
 });
 
 Route::middleware('auth')->group(function () {
@@ -52,4 +53,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

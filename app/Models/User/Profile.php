@@ -12,7 +12,15 @@ class Profile extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'surname', 'street', 'zip_code', 'city', 'voivodeship_id', 'phone'];
+    protected $fillable = [
+        'user_id',
+        'surname',
+        'street',
+        'zip_code',
+        'city',
+        'voivodeship_id',
+        'phone'
+    ];
 
     public function user(): BelongsTo
     {

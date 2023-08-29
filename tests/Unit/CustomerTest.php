@@ -27,7 +27,7 @@ class CustomerTest extends TestCase
         $this->assertDatabaseHas('customers', [
             'voivodeship_id' => $voivodeship->id,
             'name' => $customer->name,
-            'lastname' => $customer->lastname,
+            'surname' => $customer->surname,
             'street' => $customer->street,
             'zip_code' => $customer->zip_code,
             'city' => $customer->city,

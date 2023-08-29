@@ -18,11 +18,10 @@ class CustomerFactory extends Factory
     {
         return [
             'name' => $this->faker->firstName(),
-            'lastname' => $this->faker->lastName(),
+            'surname' => $this->faker->lastName(),
             'street' => $this->faker->streetAddress(),
             'zip_code' => $this->faker->postcode(),
             'city' => $this->faker->city(),
-            // 'voivodeship_id' => $faker->numberBetween(1, 16),
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->randomNumber(9),
         ];

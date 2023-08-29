@@ -14,7 +14,7 @@ class CustomerSeeder extends Seeder
     {
         DB::table('customers')->insert([
             'name' => 'Jan',
-            'lastname' => 'Kowalski',
+            'surname' => 'Kowalski',
             'street' => 'Na Wspólnej 1',
             'zip_code' => '00950',
             'city' => 'Warszawa',
@@ -26,8 +26,8 @@ class CustomerSeeder extends Seeder
         ]);
         DB::table('customers')->insert([
             'name' => 'Józef',
-            'lastname' => 'Nowak',
-            'street' => 'Woronicz 17',
+            'surname' => 'Nowak',
+            'street' => 'Woronicza 17',
             'zip_code' => '00950',
             'city' => 'Warszawa',
             'voivodeship_id' => 7,

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('voivodeship_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('voivodeship_id')->nullable()->constrained()->nullOnDelete(); // todo remove nullable
             $table->string('name', 30);
-            $table->string('lastname', 30);
+            $table->string('surname', 30);
             $table->string('street', 60);
             $table->string('zip_code', 6);
             $table->string('city', 30);
