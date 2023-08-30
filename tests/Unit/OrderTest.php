@@ -29,7 +29,6 @@ class OrderTest extends TestCase
             ->for($saleDocument)
             ->for(Customer::factory(), 'orderable')
             ->create();
-
         $this->assertDatabaseHas('orders', [
             'status_id' => $order->status->id,
             'sale_document_id' => $saleDocument->id,

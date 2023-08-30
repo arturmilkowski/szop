@@ -12,7 +12,8 @@ use App\Http\Controllers\Cart\{
 use App\Http\Controllers\Order\{CheckoutController, WithoutRegistrationController, WithRegistrationController};
 use App\Http\Controllers\Backend\User\DashboardController;
 use App\Http\Controllers\Backend\Admin\Product\{BrandController, CategoryController, ConcentrationController, SizeController, ProductController as AdminProductController};
-use App\Http\Controllers\Backend\Admin\Customer\CustomerController;
+use App\Http\Controllers\Backend\Admin\Customer\{CustomerController, OrderController as CustomerOrderController};
+
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
 Route::get('/o-firmie', [PageController::class, 'about'])->name('pages.about');
@@ -32,8 +33,6 @@ Route::post('/wyslij-zamowienie-bez-rejestracji', [WithoutRegistrationController
 Route::view('/dziekujemy-za-zamowienie-bez-rejestracji', 'order.thank.without-registration')->name('orders.thank.without-registration');
 Route::view('/dziekujemy-za-zamowienie', 'order.thank.with-registration')->name('orders.thank.with-registration');
 
-
-// Route::get('/dashboard', function () { return view('dashboard'); })->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/zamow', [WithRegistrationController::class, 'create'])->name('orders.with-registration.create');
@@ -44,7 +43,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/konto/admin/produkty/koncentracje', ConcentrationController::class)->names('backend.admins.products.concentrations')->parameters(['koncentracje' => 'concentration']);
     Route::resource('/konto/admin/produkty/pojemnosci', SizeController::class)->names('backend.admins.products.sizes')->parameters(['pojemnosci' => 'size']);
     Route::resource('/konto/admin/produkty/produkty', AdminProductController::class)->names('backend.admins.products.products')->parameters(['produkty' => 'product']);
+
     Route::resource('/konto/admin/klienci', CustomerController::class)->names('backend.admins.customers')->parameters(['klienci' => 'customer']);
+    Route::resource('/konto/admin/klienci/zamowienia', CustomerOrderController::class)
+        ->names('backend.admins.customers.orders')
+        ->parameters(['zamowienia' => 'customer']) // zamowienia it is customer
+        ->only(['edit', 'update', 'destroy']);
 });
 
 Route::middleware('auth')->group(function () {

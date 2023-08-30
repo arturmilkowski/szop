@@ -22,7 +22,7 @@ class Order extends Model
         'delivery_name',
         'comment'
     ];
-    
+
     /**
      * The model's default values for attributes.
      *

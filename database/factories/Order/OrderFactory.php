@@ -21,7 +21,7 @@ class OrderFactory extends Factory
             'delivery_cost' => $this->faker->numberBetween(15, 20),
             'total_price_and_delivery_cost' => $this->faker->numberBetween(120, 520),
             'delivery_name' => $this->faker->word(),
-            'comment' => $this->faker->paragraph(),
+            'comment' => $this->faker->words(4, true),
         ];
     }
 }
