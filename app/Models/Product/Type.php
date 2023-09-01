@@ -13,12 +13,14 @@ class Type extends Model
     protected $fillable = [
         'product_id',
         'size_id',
+        'slug',
         'name',
         'price',
         'promo_price',
         'quantity',
-        'active',
         'description',
+        'img',
+        'hide',
     ];
 
     public function product(): BelongsTo

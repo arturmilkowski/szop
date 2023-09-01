@@ -24,7 +24,7 @@ class File
             return true;
         }
 
-        return null;
+        return false;
     }
 
     public static function update(

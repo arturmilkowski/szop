@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('img')->nullable();
             $table->string('site_description')->nullable()->comment('sekcja head');
             $table->string('site_keyword')->nullable()->comment('sekcja head');
-            $table->boolean('hide')->default(1);
+            $table->boolean('hide')->default(0);
             $table->timestamps();
         });
     }

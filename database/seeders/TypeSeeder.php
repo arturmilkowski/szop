@@ -21,7 +21,9 @@ class TypeSeeder extends Seeder
             'price' => 40,
             'quantity' => 5,
             'description' => 'szklana butelka z atomizerem zakręcanym na gwint.',
-            'img' => 'lawenda-dla-panow-15-ml.webp'
+            'img' => '15-ml.jpeg',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         DB::table('types')->insert([
             'product_id' => 1,
@@ -31,7 +33,9 @@ class TypeSeeder extends Seeder
             'price' => 15,
             'quantity' => 5,
             'description' => 'próbka w szklanej buteleczce z atomizerem. zakręcana na gwint.',
-            'img' => 'lawenda-dla-panow-4-ml.webp'
+            'img' => 'probka-4-ml.jpeg',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

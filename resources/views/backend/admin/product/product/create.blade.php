@@ -56,7 +56,7 @@
                         </x-form-group>
                         <x-form-group>
                             <x-input-label for="description" value="Opis" />
-                            <x-textarea-input id="description" name="description" rows="5" placeholder="Pole nieobowiązkowe">{{ old('escription') }}</x-textarea-input>
+                            <x-textarea-input id="description" name="description" rows="5" placeholder="Pole nieobowiązkowe">{{ old('description') }}</x-textarea-input>
                             <x-input-error :messages="$errors->get('description')" />
                         </x-form-group>
                         <x-form-group-form-check>

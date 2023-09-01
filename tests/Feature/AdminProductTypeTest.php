@@ -6,13 +6,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Product\{Brand, Category, Concentration, Product};
+use App\Models\Product\{Brand, Category, Concentration, Product, Type, Size};
 
-class AdminProductTest extends TestCase
+class AdminProductTypeTest extends TestCase
 {
     use RefreshDatabase;
 
-    private $product;
+    private $product, $type;
 
     public function setUp(): void
     {
@@ -25,42 +25,46 @@ class AdminProductTest extends TestCase
             ->for(Category::factory())
             ->for(Concentration::factory())
             ->create();
+        $this->type = Type::factory()
+            ->for($this->product)
+            ->for(Size::factory())
+            ->create();
     }
 
     public function testIndex(): void
     {
         $this->withoutExceptionHandling();
-        $response = $this->get(route('backend.admins.products.products.index'));
+        $response = $this->get(route('backend.admins.products.types.index', $this->product));
         $response->assertOk();
-        $response->assertViewIs('backend.admin.product.product.index');
-        $response->assertSeeText('Produkty');
+        $response->assertViewIs('backend.admin.product.type.index');
+        $response->assertSeeText('Typy produktu');
     }
 
     public function testCreate(): void
     {
         $this->withoutExceptionHandling();
-        $response = $this->get(route('backend.admins.products.products.create'));
+        $response = $this->get(route('backend.admins.products.types.create'));
         $response->assertOk();
-        $response->assertViewIs('backend.admin.product.product.create');
+        $response->assertViewIs('backend.admin.product.type.create');
         $response->assertSeeText('Dodawanie');
     }
 
     public function testStore(): void
     {
         $this->withoutExceptionHandling();
-        $item = Product::factory()->make();
-        $response = $this->post(route('backend.admins.products.products.store', $item->toArray()));
+        $item = Type::factory()->make();
+        $response = $this->post(route('backend.admins.products.types.store', $item->toArray()));
         $response->assertStatus(302);
-        $this->assertDatabaseHas('products', ['name' => $item->name]);
+        $this->assertDatabaseHas('types', ['name' => $item->name]);
     }
 
     public function testStoreWithValidationError(): void
     {
-        $item = Product::factory()->make(['name' => '']);
-        $response = $this->post(route('backend.admins.products.products.store', $item->toArray()));
+        $item = Type::factory()->make(['name' => '']);
+        $response = $this->post(route('backend.admins.products.types.store', $item->toArray()));
         $response->assertStatus(302);
         $response->assertInvalid(['name' => 'The name field is required.']);
-        $this->assertDatabaseMissing('products', ['name' => $item->name]);
+        $this->assertDatabaseMissing('types', ['name' => $item->name]);
     }
 
     /*
@@ -76,48 +80,48 @@ class AdminProductTest extends TestCase
     public function testShow(): void
     {
         $this->withoutExceptionHandling();
-        $item = $this->product;
-        $response = $this->get(route('backend.admins.products.products.show', $item));
+        $item = $this->type;
+        $response = $this->get(route('backend.admins.products.types.show', $item));
         $response->assertOk();
-        $response->assertViewIs('backend.admin.product.product.show');
-        $response->assertSeeText('Produkt');
+        $response->assertViewIs('backend.admin.product.type.show');
+        $response->assertSeeText('Typ');
     }
 
     public function testEdit(): void
     {
         $this->withoutExceptionHandling();
-        $item = $this->product;
-        $response = $this->get(route('backend.admins.products.products.edit', $item));
+        $item = $this->type;
+        $response = $this->get(route('backend.admins.products.types.edit', $item));
         $response->assertOk();
-        $response->assertViewIs('backend.admin.product.product.edit');
+        $response->assertViewIs('backend.admin.product.type.edit');
         $response->assertSeeText('Edycja');
     }
 
     public function testUpdate(): void
     {
         $this->withoutExceptionHandling();
-        $item = $this->product;
-        $item1 = Product::factory()->make();
-        $response = $this->put(route('backend.admins.products.products.update', $item), $item1->toArray());
+        $item = $this->type;
+        $item1 = Type::factory()->make();
+        $response = $this->put(route('backend.admins.products.types.update', $item), $item1->toArray());
         $response->assertStatus(302);
-        $this->assertDatabaseHas('products', ['name' => $item1->name]);
+        $this->assertDatabaseHas('types', ['name' => $item1->name]);
     }
 
     public function testUpdateWithValidationError(): void
     {
-        $item = $this->product;
-        $item1 = Product::factory()->make(['name' => '']);
-        $response = $this->put(route('backend.admins.products.products.update', $item), $item1->toArray());
+        $item = $this->type;
+        $item1 = Type::factory()->make(['name' => '']);
+        $response = $this->put(route('backend.admins.products.types.update', $item), $item1->toArray());
         $response->assertInvalid(['name' => 'The name field is required.']);
-        $this->assertDatabaseMissing('products', ['name' => $item1->name]);
+        $this->assertDatabaseMissing('types', ['name' => $item1->name]);
     }
 
     public function testDestroy(): void
     {
         $this->withoutExceptionHandling();
-        $item = $this->product;
-        $response = $this->delete(route('backend.admins.products.products.destroy', $item));
+        $item = $this->type;
+        $response = $this->delete(route('backend.admins.products.types.destroy', $item));
         $response->assertStatus(302);
-        $this->assertDatabaseMissing('products', ['name' => $item->name]);
+        $this->assertDatabaseMissing('types', ['name' => $item->name]);
     }
 }

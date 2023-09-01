@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Http\Controllers\Backend\Admin\Product;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Product\{Product, Type, Size};
+use App\Services\File;
+use App\Http\Requests\Product\StoreTypeRequest;
+
+class TypeController extends Controller
+{
+    private $filepath = 'public/images/products/types/';
+
+    public function index(Product $product): View
+    {
+        return view('backend.admin.product.product.type.index', [
+            'product' => $product, 'collection' => $product->types
+        ]);
+    }
+
+    public function create(Product $product): View
+    {
+        $sizes = Size::all();
+        $products = Product::all();
+
+        return view(
+            'backend.admin.product.product.type.create',
+            [
+                'sizes' => $sizes, 'products' => $products, 'product' => $product
+            ]
+        );
+    }
+
+    public function store(StoreTypeRequest $request, Product $product): RedirectResponse
+    {
+        $hide = $request->input('hide', '0');
+        $validated = $request->validated();
+        $slug = Str::slug($validated['name']);
+        $validated['slug'] = $slug;
+        $validated['hide'] = $hide;
+        $file = $request->file('img');
+        if ($file) {
+            $extension = $file->extension();
+            $filename = $slug . '.' . $extension;
+            File::store($request, $this->filepath, $filename);
+            $validated['img'] = $filename;
+        }
+
+        Type::create($validated);
+
+        return redirect(route('backend.admins.products.types.index', $product))->with('message', 'Dodano');
+    }
+
+    public function show(Product $product, Type $type): View
+    {
+        return view('backend.admin.product.product.type.show', ['product' => $product, 'item' => $type]);
+    }
+
+    public function edit(Product $product, Type $type): View
+    {
+        $sizes = Size::all();
+        $products = Product::all();
+
+        return view('backend.admin.product.product.type.edit', [
+            'sizes' => $sizes,
+            'products' => $products,
+            'product' => $product,
+            'item' => $type
+        ]);
+    }
+
+    public function update(StoreTypeRequest $request, Product $product, Type $type): RedirectResponse
+    {
+        $hide = $request->input('hide', '0');
+        $validated = $request->validated();
+        $slug = Str::slug($validated['name']);
+        $validated['slug'] = $slug;
+        $validated['hide'] = $hide;
+        $file = $request->file('img');
+        if ($file) {
+            $extension = $file->extension();
+            $filename = $slug . '.' . $extension;
+            $success = File::update($request, $type->img, $this->filepath, $filename);
+            if ($success) {
+                $validated['img'] = $filename; // assign new path
+            }
+        }
+        $type->update($validated);
+
+        return redirect(route('backend.admins.products.types.show', [$product, $type]))->with('message', 'Zmieniono');
+    }
+
+    public function destroy(Product $product, Type $type): RedirectResponse
+    {
+        if ($type->img) {
+            Storage::delete($this->filepath . $type->img);
+        }
+        $type->delete();
+
+        return redirect(route('backend.admins.products.types.index', [$product, $type]))->with('message', 'Usunięto');
+    }
+}

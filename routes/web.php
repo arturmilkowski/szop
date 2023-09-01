@@ -11,7 +11,14 @@ use App\Http\Controllers\Cart\{
 };
 use App\Http\Controllers\Order\{CheckoutController, WithoutRegistrationController, WithRegistrationController};
 use App\Http\Controllers\Backend\User\DashboardController;
-use App\Http\Controllers\Backend\Admin\Product\{BrandController, CategoryController, ConcentrationController, SizeController, ProductController as AdminProductController};
+use App\Http\Controllers\Backend\Admin\Product\{
+    BrandController,
+    CategoryController,
+    ConcentrationController,
+    SizeController,
+    ProductController as AdminProductController,
+    TypeController as AdminTypeController
+};
 use App\Http\Controllers\Backend\Admin\Customer\{CustomerController, OrderController as CustomerOrderController};
 
 
@@ -43,6 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/konto/admin/produkty/koncentracje', ConcentrationController::class)->names('backend.admins.products.concentrations')->parameters(['koncentracje' => 'concentration']);
     Route::resource('/konto/admin/produkty/pojemnosci', SizeController::class)->names('backend.admins.products.sizes')->parameters(['pojemnosci' => 'size']);
     Route::resource('/konto/admin/produkty/produkty', AdminProductController::class)->names('backend.admins.products.products')->parameters(['produkty' => 'product']);
+    Route::resource('/konto/admin/produkty/produkty.typy', AdminTypeController::class)->names('backend.admins.products.types')->parameters(['produkty' => 'product', 'typy' => 'type']);
 
     Route::resource('/konto/admin/klienci', CustomerController::class)->names('backend.admins.customers')->parameters(['klienci' => 'customer']);
     Route::resource('/konto/admin/klienci/zamowienia', CustomerOrderController::class)

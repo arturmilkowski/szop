@@ -11,6 +11,7 @@
                             <tr>
                                 <x-table-data>#</x-table-data>                                
                                 <x-table-data>{{ $item->id }}</x-table-data>
+                            </tr>
                             <tr>
                                 <x-table-data>Imię</x-table-data>
                                 <x-table-data>{{ $item->name }}</x-table-data>

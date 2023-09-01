@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('slug', 40)->index();
             $table->string('name', 40)->index();
             $table->decimal('price', 6, 2)->default(0);
-            $table->decimal('promo_price', 6, 2)->default(0);
+            $table->decimal('promo_price', 6, 2)->nullable()->default(0);
             $table->unsignedTinyInteger('quantity')->default(0);
-            $table->boolean('active')->default(true);
             $table->text('description')->nullable();
             $table->string('img', 40)->nullable();
+            $table->boolean('hide')->default(0);
             $table->timestamps();
         });
     }

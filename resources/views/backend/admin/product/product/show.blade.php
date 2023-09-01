@@ -62,13 +62,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p>
-                        <a href="{{ route('backend.admins.products.products.index') }}">Powrót</a>
-                        |
-                        <a href="{{ route('backend.admins.products.products.edit', $item) }}">
-                            Edytuj
-                        </a>
-                    </p>
+                    <x-btn-group>
+                        <x-link href="{{ route('backend.admins.products.products.index') }}">Powrót</x-link>
+                        <x-link href="{{ route('backend.admins.products.products.edit', $item) }}">Edytuj</x-link>
+                        <x-link href="{{ route('backend.admins.products.types.index', $item) }}">Typy</x-link>
+                    </x-btn-group>
                 </div>
             </div>
         </div>

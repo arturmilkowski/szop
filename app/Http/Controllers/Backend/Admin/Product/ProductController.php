@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend\Admin\Product;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
@@ -14,7 +13,7 @@ use App\Services\File;
 
 class ProductController extends Controller
 {
-    private $productFilepath = 'public/images/products/';
+    private $filepath = 'public/images/products/';
 
     public function index(): View
     {
@@ -41,17 +40,17 @@ class ProductController extends Controller
         $slug = Str::slug($validated['name']);
         $validated['slug'] = $slug;
         $validated['hide'] = $hide;
-        
+
         $file = $request->file('img');
         if ($file) {
             $extension = $file->extension();
             $filename = $slug . '.' . $extension;
-            File::store($request, $this->productFilepath, $filename);
+            File::store($request, $this->filepath, $filename);
             $validated['img'] = $filename;
         }
 
         Product::create($validated);
-        
+
         return redirect(route('backend.admins.products.products.index'))->with('message', 'Dodano');
     }
 
@@ -74,9 +73,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(StoreProductRequest $request, Product $product): RedirectResponse
     {
         $hide = $request->input('hide', '0');
@@ -88,20 +84,20 @@ class ProductController extends Controller
         if ($file) {
             $extension = $file->extension();
             $filename = $slug . '.' . $extension;
-            $path = File::update($request, $product->img, $this->productFilepath, $filename);
+            $path = File::update($request, $product->img, $this->filepath, $filename);
             if ($path) {
                 $validated['img'] = $filename; // assign new path
             }
         }
         $product->update($validated);
-        
+
         return redirect(route('backend.admins.products.products.index'))->with('message', 'Zmieniono');
     }
 
     public function destroy(Product $product): RedirectResponse
     {
         if ($product->img) {
-            Storage::delete($this->productFilepath . $product->img);
+            Storage::delete($this->filepath . $product->img);
         }
         $product->delete();
 
