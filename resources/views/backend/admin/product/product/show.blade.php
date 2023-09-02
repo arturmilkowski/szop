@@ -45,7 +45,18 @@
                             <tr>
                                 <x-table-data>Obrazek</x-table-data>
                                 <x-table-data>
-                                    <img width="200" src="{{ asset('storage/images/products') . '/' . $item->img }}" alt="{{ $item->name }}">
+                                    @if($item->img)
+                                    <a href="{{ route('backend.admins.products.products.images.show', $item) }}">
+                                        <img width="200" src="{{ asset('storage/images/products') . '/' . $item->img }}" alt="{{ $item->name }}">
+                                    </a>
+                                    <form action="{{ route('backend.admins.products.products.images.destroy', $item) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <x-danger-button class="mt-1" :href="route('backend.admins.products.products.images.destroy', $item)" onclick="event.preventDefault(); this.closest('form').submit();">
+                                            Usuń
+                                        </x-danger-button>
+                                    </form>
+                                    @endif
                                 </x-table-data>
                             </tr>
                             <tr>

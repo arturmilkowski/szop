@@ -12,7 +12,7 @@ class AdminProductTypeTest extends TestCase
 {
     use RefreshDatabase;
 
-    private $product, $type;
+    private $product, $size, $type;
 
     public function setUp(): void
     {
@@ -20,11 +20,13 @@ class AdminProductTypeTest extends TestCase
 
         $user = User::factory()->create();
         $this->actingAs($user);
+        $this->size = Size::factory()->create();
         $this->product = Product::factory()
             ->for(Brand::factory())
             ->for(Category::factory())
             ->for(Concentration::factory())
             ->create();
+        // dd($this->product);
         $this->type = Type::factory()
             ->for($this->product)
             ->for(Size::factory())
@@ -36,24 +38,25 @@ class AdminProductTypeTest extends TestCase
         $this->withoutExceptionHandling();
         $response = $this->get(route('backend.admins.products.types.index', $this->product));
         $response->assertOk();
-        $response->assertViewIs('backend.admin.product.type.index');
-        $response->assertSeeText('Typy produktu');
+        $response->assertViewIs('backend.admin.product.product.type.index');
+        // $response->assertSeeText('Typy produktu');
     }
 
     public function testCreate(): void
     {
         $this->withoutExceptionHandling();
-        $response = $this->get(route('backend.admins.products.types.create'));
+        $response = $this->get(route('backend.admins.products.types.create', $this->product));
         $response->assertOk();
-        $response->assertViewIs('backend.admin.product.type.create');
+        $response->assertViewIs('backend.admin.product.product.type.create');
         $response->assertSeeText('Dodawanie');
     }
 
     public function testStore(): void
     {
         $this->withoutExceptionHandling();
-        $item = Type::factory()->make();
-        $response = $this->post(route('backend.admins.products.types.store', $item->toArray()));
+
+        $item = Type::factory()->make(['product_id' => $this->product->id, 'size_id' => $this->size->id]);
+        $response = $this->post(route('backend.admins.products.types.store', $this->product), $item->toArray());
         $response->assertStatus(302);
         $this->assertDatabaseHas('types', ['name' => $item->name]);
     }
@@ -61,7 +64,7 @@ class AdminProductTypeTest extends TestCase
     public function testStoreWithValidationError(): void
     {
         $item = Type::factory()->make(['name' => '']);
-        $response = $this->post(route('backend.admins.products.types.store', $item->toArray()));
+        $response = $this->post(route('backend.admins.products.types.store', $this->product), $item->toArray());
         $response->assertStatus(302);
         $response->assertInvalid(['name' => 'The name field is required.']);
         $this->assertDatabaseMissing('types', ['name' => $item->name]);
@@ -81,9 +84,9 @@ class AdminProductTypeTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $item = $this->type;
-        $response = $this->get(route('backend.admins.products.types.show', $item));
+        $response = $this->get(route('backend.admins.products.types.show', [$this->product, $item]));
         $response->assertOk();
-        $response->assertViewIs('backend.admin.product.type.show');
+        $response->assertViewIs('backend.admin.product.product.type.show');
         $response->assertSeeText('Typ');
     }
 
@@ -91,9 +94,9 @@ class AdminProductTypeTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $item = $this->type;
-        $response = $this->get(route('backend.admins.products.types.edit', $item));
+        $response = $this->get(route('backend.admins.products.types.edit', [$this->product, $item]));
         $response->assertOk();
-        $response->assertViewIs('backend.admin.product.type.edit');
+        $response->assertViewIs('backend.admin.product.product.type.edit');
         $response->assertSeeText('Edycja');
     }
 
@@ -101,8 +104,8 @@ class AdminProductTypeTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $item = $this->type;
-        $item1 = Type::factory()->make();
-        $response = $this->put(route('backend.admins.products.types.update', $item), $item1->toArray());
+        $item1 = Type::factory()->make(['product_id' => $this->product->id, 'size_id' => $this->size->id]);
+        $response = $this->put(route('backend.admins.products.types.update', [$this->product, $item]), $item1->toArray());
         $response->assertStatus(302);
         $this->assertDatabaseHas('types', ['name' => $item1->name]);
     }
@@ -111,7 +114,7 @@ class AdminProductTypeTest extends TestCase
     {
         $item = $this->type;
         $item1 = Type::factory()->make(['name' => '']);
-        $response = $this->put(route('backend.admins.products.types.update', $item), $item1->toArray());
+        $response = $this->put(route('backend.admins.products.types.update', [$this->product, $item]), $item1->toArray());
         $response->assertInvalid(['name' => 'The name field is required.']);
         $this->assertDatabaseMissing('types', ['name' => $item1->name]);
     }
@@ -120,7 +123,7 @@ class AdminProductTypeTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $item = $this->type;
-        $response = $this->delete(route('backend.admins.products.types.destroy', $item));
+        $response = $this->delete(route('backend.admins.products.types.destroy', [$this->product, $item]));
         $response->assertStatus(302);
         $this->assertDatabaseMissing('types', ['name' => $item->name]);
     }

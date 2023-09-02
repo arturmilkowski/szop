@@ -36,7 +36,7 @@ class TypeFactory extends Factory
             'price' => $price,
             'promo_price' => $promoPrice,
             'quantity' => $this->faker->numberBetween(1, 5),
-            'active' => $this->faker->boolean(),
+            'hide' => $this->faker->boolean(),
             'description' => $this->faker->text,
             'created_at' => now(),
         ];

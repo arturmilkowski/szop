@@ -17,7 +17,9 @@ use App\Http\Controllers\Backend\Admin\Product\{
     ConcentrationController,
     SizeController,
     ProductController as AdminProductController,
-    TypeController as AdminTypeController
+    ProductImgController as AdminProductImgController,
+    TypeController as AdminTypeController,
+    TypeImgController as AdminTypeImgController
 };
 use App\Http\Controllers\Backend\Admin\Customer\{CustomerController, OrderController as CustomerOrderController};
 
@@ -50,7 +52,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/konto/admin/produkty/koncentracje', ConcentrationController::class)->names('backend.admins.products.concentrations')->parameters(['koncentracje' => 'concentration']);
     Route::resource('/konto/admin/produkty/pojemnosci', SizeController::class)->names('backend.admins.products.sizes')->parameters(['pojemnosci' => 'size']);
     Route::resource('/konto/admin/produkty/produkty', AdminProductController::class)->names('backend.admins.products.products')->parameters(['produkty' => 'product']);
-    Route::resource('/konto/admin/produkty/produkty.typy', AdminTypeController::class)->names('backend.admins.products.types')->parameters(['produkty' => 'product', 'typy' => 'type']);
+    Route::resource('/konto/admin/produkty/produkty/obrazki', AdminProductImgController::class)
+        ->names('backend.admins.products.products.images')
+        ->parameters(['obrazki' => 'product'])
+        ->only(['show', 'destroy']);
+
+    Route::resource('/konto/admin/produkty/produkty.typy', AdminTypeController::class)
+        ->names('backend.admins.products.types')
+        ->parameters(['produkty' => 'product', 'typy' => 'type']);
+    Route::resource('/konto/admin/produkty/produkty.typy.obrazki', AdminTypeImgController::class)
+        ->names('backend.admins.products.types.images')
+        ->parameters(['produkty' => 'product', 'typy' => 'type', 'obrazki' => 'type'])
+        ->only(['show', 'destroy']);
 
     Route::resource('/konto/admin/klienci', CustomerController::class)->names('backend.admins.customers')->parameters(['klienci' => 'customer']);
     Route::resource('/konto/admin/klienci/zamowienia', CustomerOrderController::class)
