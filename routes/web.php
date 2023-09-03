@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\Admin\Product\{
     TypeImgController as AdminTypeImgController
 };
 use App\Http\Controllers\Backend\Admin\Customer\{CustomerController, OrderController as CustomerOrderController};
+use App\Http\Controllers\Backend\Admin\Order\OrderController as AdminOrderController;
 
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
@@ -70,6 +71,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->names('backend.admins.customers.orders')
         ->parameters(['zamowienia' => 'customer']) // zamowienia it is customer
         ->only(['edit', 'update', 'destroy']);
+
+    Route::resource('/konto/admin/zamowienia', AdminOrderController::class)->names('backend.admins.orders')->parameters(['zamowienia' => 'order']);
 });
 
 Route::middleware('auth')->group(function () {

@@ -6,7 +6,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('backend.admins.customers.orders.update', ['customer' => $customer]) }}" method="POST">
+                    <form action="{{ route('backend.admins.orders.update', ['order' => $item]) }}" method="POST">
                         @csrf
                         @method('patch')
                         <x-form-group>
@@ -24,15 +24,15 @@
                         </x-form-group>
                         <x-primary-button>Edytuj</x-primary-button>                        
                     </form>
-                    <form action="{{ route('backend.admins.customers.orders.destroy', ['customer' => $customer]) }}" method="POST">
+                    <form action="{{ route('backend.admins.orders.destroy', ['order' => $item]) }}" method="POST">
                         @csrf
                         @method('delete')
-                        <x-danger-button class="mt-1" :href="route('backend.admins.customers.orders.destroy', ['customer' => $customer])" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <x-danger-button class="mt-1" :href="route('backend.admins.orders.destroy', ['order' => $item])" onclick="event.preventDefault(); this.closest('form').submit();">
                             Usuń
                         </x-danger-button>
                     </form>
                     <p>
-                        <x-link href="{{ route('backend.admins.customers.show', $customer) }}">Powrót</x-link>
+                        <x-link href="{{ route('backend.admins.orders.show', $item) }}">Powrót</x-link>
                     </p>
                 </div>
             </div>
