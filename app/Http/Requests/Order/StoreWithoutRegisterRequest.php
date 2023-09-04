@@ -22,15 +22,15 @@ class StoreWithoutRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3|max:30',
-            'lastname' => 'required|string|min:3|max:30',
-            'street' => 'required|min:3|max:60',
-            'zip_code' => 'required|regex:/^([0-9]{2})(-[0-9]{3})?$/i',
-            'city' => 'required|min:3|max:60',
-            'voivodeship_id' => 'required|string',
-            'email' => 'required|min:5|max:30',
-            'phone' => 'nullable|digits:9',
-            'comment' => 'max:1000',
+            'name' => ['required', 'string', 'min:3', 'max:30'],
+            'surname' => ['required', 'string', 'min:3', 'max:30'],
+            'street' => ['required', 'min:3', 'max:60'],
+            'zip_code' => ['required', 'regex:/^([0-9]{2})(-[0-9]{3})?$/i'],
+            'city' => ['required', 'min:3', 'max:60'],
+            'voivodeship_id' => ['required', 'string'],
+            'email' => ['required', 'min:5', 'max:30'],
+            'phone' => ['nullable', 'digits:9'],
+            'comment' => ['max:1000'],
             'term' => 'required',
         ];
     }

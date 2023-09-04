@@ -2,6 +2,7 @@
     <x-slot:title>Zamówienie bez rejestracji</x-slot>
     <x-header-one>Zamówienie bez rejestracji</x-header-one>    
     <form action="{{ route('orders.without-registration.store') }}" method="POST" novalidate>
+      {{ $errors  }}
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
       <div class="form-group">
         <label for="name">Imię</label>
@@ -11,14 +12,14 @@
       </div>
 
       <div class="form-group">
-        <label for="lastname">Nazwisko</label>
-        <input class="form-control @error('lastname')is-invalid @enderror" type="text" id="lastname" name="lastname" value="{{ old('lastname') }}" minlength="3" maxlength="30" placeholder="pole obowiązkowe" required>
-        @error('lastname')<div class="invalid-feedback">{{ $message }}</div>@enderror
+        <label for="surname">Nazwisko</label>
+        <input class="form-control @error('surname')is-invalid @enderror" type="text" id="surname" name="surname" value="{{ old('surname') }}" minlength="3" maxlength="30" placeholder="pole obowiązkowe" required>
+        @error('surname')<div class="invalid-feedback">{{ $message }}</div>@enderror
 
       </div>
 
       <div class="form-group">
-        <label for="lastname">Ulica i numer mieszkania</label>
+        <label for="surname">Ulica i numer mieszkania</label>
         <input class="form-control @error('street')is-invalid @enderror" type="text" id="street" name="street" value="{{ old('street') }}" minlength="3" maxlength="60" placeholder="pole obowiązkowe" required>
         @error('street')<div class="invalid-feedback">{{ $message }}</div>@enderror
 
