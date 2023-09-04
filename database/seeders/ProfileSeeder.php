@@ -17,7 +17,7 @@ class ProfileSeeder extends Seeder
             'user_id' => 1,
             'voivodeship_id' => 4,
             'surname' => 'miłkowski',
-            'street' => 'Bałandy',
+            'street' => 'Bałandy 4B/8',
             'zip_code' => '32-600',
             'city' => 'Oświęcim',
             'phone' => '123456789',

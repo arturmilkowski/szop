@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            // $table->char('user_id', 36)->nullable();
-            $table->string('slug', 60)->unique();
-            $table->string('title', 60)->unique();
+            $table->foreignId('user_id')->constrained();
+            $table->string('slug')->unique();
+            $table->string('title')->unique();
             $table->string('intro')->nullable()->comment('wstęp');
             $table->text('content')->nullable();
-            $table->string('img', 100)->nullable();
+            $table->string('img')->nullable();
             $table->string('site_description')->nullable()->comment('sekcja head');
             $table->string('site_keyword')->nullable()->comment('sekcja head');
             $table->boolean('approved')->default(1)->index()->comment('zatwierdzony?');

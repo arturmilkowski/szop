@@ -33,32 +33,27 @@ class OrderController extends Controller
         //
     }
 
-    public function show(string $id): View
+    public function show(Order $order): View
     {
-        $order = Order::with('items')->find($id);
-
         return view('backend.admin.order.show', ['item' => $order]);
     }
 
-    public function edit(string $id): View
+    public function edit(Order $order): View
     {
-        $order = Order::find($id);
         $statuses = Status::all();
 
         return view('backend.admin.order.edit', ['statuses' => $statuses, 'item' => $order]);
     }
 
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, Order $order): RedirectResponse
     {
-        $order = Order::find($id);
         $order->update(['status_id' => $request->status_id]);
 
         return redirect(route('backend.admins.orders.show', $order))->with('message', 'Zmieniono');
     }
 
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Order $order): RedirectResponse
     {
-        $order = Order::find($id);
         $order->delete();
 
         return redirect(route('backend.admins.orders.index'))->with('message', 'Usunięto');

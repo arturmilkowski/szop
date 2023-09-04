@@ -13,7 +13,7 @@ class PostSeeder extends Seeder
     public function run(): void
     {
         DB::table('posts')->insert([
-            // 'user_id' => '6abd1059-b051-4ce1-af5e-799cc38d0ff1',
+            'user_id' => 1,
             'slug' => 'witam-na-mojej-stronie',
             'title' => 'witam na mojej stronie',
             'intro' => 'Intro',

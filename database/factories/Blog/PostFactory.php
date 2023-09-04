@@ -37,6 +37,7 @@ class PostFactory extends Factory
             'site_keyword' => $this->faker->text(30),
             'approved' => $approved,
             'published' => $published,
+            'comments_allowed' => $this->faker->numberBetween($min = 0, $max = 1),
         ];
     }
 }

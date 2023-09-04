@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignUlid('order_id'); // ->constrained(); // ->onUpdate('cascade')->onDelete('cascade')
+            $table->foreignUlid('order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->integer('type_id')->nullable();
             $table->string('type_name', 40);
             $table->unsignedTinyInteger('type_size_id');

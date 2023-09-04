@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->ulid('id');
-            // $table->id();
+            $table->ulid('id')->primary();
             $table->integer('orderable_id');
             $table->string('orderable_type');
             $table->foreignId('status_id')->default(1)->constrained()->onUpdate('cascade')->onDelete('cascade');

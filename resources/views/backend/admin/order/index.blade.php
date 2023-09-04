@@ -17,28 +17,27 @@
                                 <x-table-header>orderable_id</x-table-header>
                                 <x-table-header>orderable_type</x-table-header>
                                 <x-table-header>Status</x-table-header>
-                                <x-table-header>Koszt produktów</x-table-header>
-                                <x-table-header>Koszt dostawy</x-table-header>
-                                <x-table-header>Koszt razem</x-table-header>
-                                <x-table-header>Dostawca</x-table-header>
+                                {{-- <x-table-header>Koszt produktów</x-table-header> --}}
+                                {{-- <x-table-header>Koszt dostawy</x-table-header> --}}
+                                <x-table-header>Koszt</x-table-header>
+                                {{-- <x-table-header>Dostawca</x-table-header> --}}
                             </tr>
                         </thead>
                         <tbody>
 @foreach ($collection as $item)
                             <tr>                                
                                 <x-table-data>
-                                    <a href="{{ route('backend.admins.orders.show', $item) }}">
+                                    <x-link href="{{ route('backend.admins.orders.show', $item) }}">
                                         {{ $item->id }}
-                                    </a>
+                                    </x-link>
                                 </x-table-data>
                                 <x-table-data>{{ $item->orderable_id }}</x-table-data>
                                 <x-table-data><small>{{ $item->orderable_type }}</small></x-table-data>
                                 <x-table-data>{{ $item->status->name }}</x-table-data>
-                                <x-table-data>{{ $item->total_price }}</x-table-data>
-                                <x-table-data>{{ $item->delivery_cost }}</x-table-data>
+                                {{-- <x-table-data>{{ $item->total_price }}</x-table-data> --}}
+                                {{-- <x-table-data>{{ $item->delivery_cost }}</x-table-data> --}}
                                 <x-table-data>{{ $item->total_price_and_delivery_cost }}</x-table-data>
-                                <x-table-data>{{ $item->delivery_name }}</x-table-data>
-                                    {{-- <x-link href="{{ route('backend.admins.products.types.show', [$product, $item]) }}">{{ $item->name }}</x-link> --}}                                
+                                {{-- <x-table-data>{{ $item->delivery_name }}</x-table-data> --}}                                    
                             </tr>
 @endforeach
                         </tbody>
@@ -46,9 +45,6 @@
 @else
                     <div>Brak danych</div>
 @endif
-                    <x-btn-group>
-                        <x-link href="{{-- route('backend.admins.products.products.show', $product) --}}">Powrót</x-link>
-                    </x-btn-group>
                 </div>
             </div>
         </div>

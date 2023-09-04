@@ -17,6 +17,8 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => $this->faker->asciify('**************************'),
+            'orderable_type' => $this->faker->randomElement(['App\Models\Customer\Customer', 'App\Models\User']),
             'total_price' => $this->faker->numberBetween(100, 500),
             'delivery_cost' => $this->faker->numberBetween(15, 20),
             'total_price_and_delivery_cost' => $this->faker->numberBetween(120, 520),

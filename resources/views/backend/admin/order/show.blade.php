@@ -44,21 +44,23 @@
                                 <x-table-data>Klient</x-table-data>
                                 <x-table-data>
                                     <ul>
-                                        <li>{{ $item->orderable->name ?? '' }} {{ $item->orderable->surname ?? '' }}</li>
-                                        <li>{{ $item->orderable->street ?? '' }}</li>
-                                        <li>{{ $item->orderable->zip_code ?? '' }} {{ $item->orderable->city ?? '' }}</li>
-                                        <li>{{ $item->orderable->email ?? '' }}</li>
+                                        @if ($item->orderable->profile)
+                                        <li>{{ $item->orderable->name }} {{ $item->orderable->profile->surname }}</li>
+                                        <li>{{ $item->orderable->profile->street }}</li>
+                                        <li>{{ $item->orderable->profile->zip_code }} {{ $item->orderable->profile->city }}</li>
+                                        <li>{{ $item->orderable->email }}</li>
+                                        <li>{{ $item->orderable->profile->phone ?? '' }}</li>
+                                        <li>{{ $item->orderable->profile->voivodeship->name }}</li>
+                                        @else
+                                        <li>{{ $item->orderable->name }} {{ $item->orderable->surname }}</li>
+                                        <li>{{ $item->orderable->street }}</li>
+                                        <li>{{ $item->orderable->zip_code }} {{ $item->orderable->city }}</li>
+                                        <li>{{ $item->orderable->email }}</li>
                                         <li>{{ $item->orderable->phone ?? '' }}</li>
-                                        <li>{{ $item->orderable->voivodeship_id ?? '' }}</li>
-                                        <li>{{ $item->orderable->profile ?? '' }}</li>
+                                        <li>{{ $item->orderable->voivodeship->name }}</li>
+                                        @endif
                                     </ul>                                    
-                                    {{-- {{ $order->orderable->name }} --}}
                                     
-{{-- @if (is_a($order->orderable, 'App\Models\Customer'))
-                                    {{ $order->orderable->lastname }}
-@else
-                                    {{ $order->orderable->profile->lastname }}
-@endif --}}
                                 </x-table-data>
                             </tr>
                             <tr>

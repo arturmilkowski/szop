@@ -14,7 +14,7 @@ class ItemSeeder extends Seeder
     public function run(): void
     {
         DB::table('items')->insert([
-            'order_id' => 1,
+            'order_id' => '02h9dt42pn29hfx499sk7tbh1a',
             'type_id' => 1,
             'type_size_id' => '1',
             'type_name' => 'type name',

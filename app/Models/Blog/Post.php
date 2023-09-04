@@ -4,15 +4,17 @@ namespace App\Models\Blog;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
+use App\Models\User;
 
 class Post extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        // 'user_id',
+        'user_id',
         // 'tag_id',
+        'slug',
         'title',
         'intro',
         'content',
@@ -20,8 +22,14 @@ class Post extends Model
         'site_description',
         'site_keyword',
         'approved',
-        'published'
+        'published',
+        'comments_allowed',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function comments(): HasMany
     {

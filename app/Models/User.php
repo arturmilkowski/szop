@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasOne, MorphMany};
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany, HasOne, MorphMany};
 use App\Models\Order\Order;
 use App\Models\User\Profile;
+use App\Models\Blog\Post;
 
 class User extends Authenticatable
 {
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function orders(): MorphMany
     {
         return $this->morphMany(Order::class, 'orderable');
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 }

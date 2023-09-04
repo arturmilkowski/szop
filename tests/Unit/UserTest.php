@@ -6,9 +6,9 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use App\Models\User;
-use App\Models\Order\{Order, Status, SaleDocument};
+use App\Models\Order\{Order, Voivodeship};
 use App\Models\User\Profile;
-use App\Models\Order\Voivodeship;
+use App\Models\Blog\Post;
 
 class UserTest extends TestCase
 {
@@ -26,15 +26,14 @@ class UserTest extends TestCase
         $user = User::factory()->create();
 
         $this->assertInstanceOf(User::class, $user);
-
     }
 
     public function testUserHasOrders(): void
     {
         $user = User::factory()
             ->has(Order::factory())
-            ->make();        
-        
+            ->make();
+
         $this->assertInstanceOf(Collection::class, $user->orders);
     }
 
@@ -45,5 +44,14 @@ class UserTest extends TestCase
             ->create();
 
         $this->assertInstanceOf(Profile::class, $user->profile);
+    }
+
+    public function testUserHasManyPosts(): void
+    {
+        $user = User::factory()
+            ->has(Post::factory())
+            ->make();
+
+        $this->assertInstanceOf(Collection::class, $user->posts);
     }
 }
