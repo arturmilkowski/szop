@@ -23,7 +23,10 @@ use App\Http\Controllers\Backend\Admin\Product\{
 };
 use App\Http\Controllers\Backend\Admin\Customer\{CustomerController, OrderController as CustomerOrderController};
 use App\Http\Controllers\Backend\Admin\Order\OrderController as AdminOrderController;
-use App\Http\Controllers\Backend\Admin\Blog\PostController as AdminPostController;
+use App\Http\Controllers\Backend\Admin\Blog\{
+    PostController as AdminPostController,
+    PostImgController as AdminPostImgController
+};
 
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
@@ -76,6 +79,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/konto/admin/zamowienia', AdminOrderController::class)->names('backend.admins.orders')->parameters(['zamowienia' => 'order']);
 
     Route::resource('/konto/admin/blog/wpisy', AdminPostController::class)->names('backend.admins.blog.posts')->parameters(['wpisy' => 'post']);
+    Route::resource('/konto/admin/blog/wpisy/obrazki', AdminPostImgController::class)
+        ->names('backend.admins.blog.posts.images')
+        ->only(['show', 'destroy'])
+        ->parameters(['obrazki' => 'post']);
 });
 
 Route::middleware('auth')->group(function () {

@@ -24,6 +24,6 @@ class ProductImgController extends Controller
 
         return redirect()
             ->route('backend.admins.products.products.show', $product)
-            ->with('message', 'Image deleted');
+            ->with('message', 'Usunięto');
     }
 }
