@@ -23,8 +23,9 @@
             <x-alert>{{ session('message') }}</x-alert>
             @endif
             <main>
-                {{ $slot }}
+                {{ $slot }}                
             </main>
+            <x-footer-admin />
         </div>
     </body>
 </html>

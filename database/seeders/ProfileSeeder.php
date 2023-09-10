@@ -21,6 +21,8 @@ class ProfileSeeder extends Seeder
             'zip_code' => '32-600',
             'city' => 'Oświęcim',
             'phone' => '123456789',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

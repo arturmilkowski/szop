@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Klienci &mdash; osoby, które dokonały zakupów bez rejestracji</h2>
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Użytkownicy sklepu &mdash; osoby, które się zarejestrowały</h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <p class="mb-3">
-                        <x-link href="{{ route('backend.admins.customers.create') }}">Dodaj</x-link>
+                        <x-link href="{{-- route('backend.admins.orders.create') --}}">Dodaj</x-link>
                     </p>
 @if ($collection->count())
                     <table class="w-full">
@@ -26,12 +26,18 @@
                             <tr>                                
                                 <x-table-data>{{ $item->id }}</x-table-data>
                                 <x-table-data>
-                                    <x-link href="{{ route('backend.admins.customers.show', $item) }}">{{ $item->name }} {{ $item->surname }}</x-link>
+                                    <x-link href="{{ route('backend.admins.users.show', $item) }}">
+                                        {{ $item->name }} {{ $item->profile->surname ?? ''}}
+                                    </x-link>
                                 </x-table-data>
                                 <x-table-data>{{ $item->email }}</x-table-data>
-                                <x-table-data>{{ $item->phone }}</x-table-data>
-                                <x-table-data>{{ $item->city }}</x-table-data>
-                                <x-table-data>{{ $item->created_at->format("m.d.Y") }}</x-table-data>
+                                <x-table-data>{{ $item->profile->phone ?? '-'}}</x-table-data>
+                                <x-table-data>{{ $item->profile->city ?? '-'}}</x-table-data>                                
+                                <x-table-data>{{ $item->created_at }}</x-table-data>
+                                {{-- <x-table-data>{{ $item->total_price }}</x-table-data> --}}
+                                {{-- <x-table-data>{{ $item->delivery_cost }}</x-table-data> --}}
+                                {{-- <x-table-data>{{ $item->total_price_and_delivery_cost }}</x-table-data> --}}
+                                {{-- <x-table-data>{{ $item->delivery_name }}</x-table-data> --}}                                    
                             </tr>
 @endforeach
                         </tbody>

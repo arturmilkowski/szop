@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\Admin\Product\{
     TypeImgController as AdminTypeImgController
 };
 use App\Http\Controllers\Backend\Admin\Customer\{CustomerController, OrderController as CustomerOrderController};
+use App\Http\Controllers\Backend\Admin\User\UserController as AdminUserController;
 use App\Http\Controllers\Backend\Admin\Order\OrderController as AdminOrderController;
 use App\Http\Controllers\Backend\Admin\Blog\{
     PostController as AdminPostController,
@@ -52,6 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/zamow', [WithRegistrationController::class, 'create'])->name('orders.with-registration.create');
     Route::post('/wyslij-zamowienie', [WithRegistrationController::class, 'store'])->name('orders.with-registration.store');
 
+    Route::view('/konto/admin/produkty/index', 'backend.admin.product.index.index')->name('backend.admins.products.index');
     Route::resource('/konto/admin/produkty/firmy', BrandController::class)->names('backend.admins.products.brands')->parameters(['firmy' => 'brand']);
     Route::resource('/konto/admin/produkty/kategorie', CategoryController::class)->names('backend.admins.products.categories')->parameters(['kategorie' => 'category']);
     Route::resource('/konto/admin/produkty/koncentracje', ConcentrationController::class)->names('backend.admins.products.concentrations')->parameters(['koncentracje' => 'concentration']);
@@ -61,7 +63,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->names('backend.admins.products.products.images')
         ->parameters(['obrazki' => 'product'])
         ->only(['show', 'destroy']);
-
     Route::resource('/konto/admin/produkty/produkty.typy', AdminTypeController::class)
         ->names('backend.admins.products.types')
         ->parameters(['produkty' => 'product', 'typy' => 'type']);
@@ -75,6 +76,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->names('backend.admins.customers.orders')
         ->parameters(['zamowienia' => 'customer']) // zamowienia it is customer
         ->only(['edit', 'update', 'destroy']);
+
+    Route::resource('/konto/admin/uzytkownicy', AdminUserController::class)->names('backend.admins.users')->parameters(['uzytkownicy' => 'user']);
 
     Route::resource('/konto/admin/zamowienia', AdminOrderController::class)->names('backend.admins.orders')->parameters(['zamowienia' => 'order']);
 
