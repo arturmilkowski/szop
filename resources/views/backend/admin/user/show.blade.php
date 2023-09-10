@@ -73,7 +73,7 @@
                     </table>
                     <x-btn-group>
                         <x-link href="{{ route('backend.admins.users.index') }}">Powrót</x-link>                        
-                        {{-- <x-link href="{{ route('backend.admins.orders.edit', $item) }}">Edytuj</x-link> --}}
+                        <x-link href="{{ route('backend.admins.users.edit', $item) }}">Edytuj</x-link>
                     </x-btn-group>
                 </div>
             </div>
@@ -84,10 +84,31 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @if ($item->orders->count())
-                    <table class="w-full"></table>
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <x-table-header>#</x-table-header>
+                                <x-table-header>Status</x-table-header>
+                                <x-table-header>Cena produktów</x-table-header>
+                                <x-table-header>Data</x-table-header>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($item->orders as $order)
+                            <tr>
+                                <x-table-data>
+                                    <x-link href="{{ route('backend.admins.orders.show', $order) }}">{{ $order->id }}</x-link>
+                                </x-table-data>
+                                <x-table-data>{{ $order->status->name }}</x-table-data>
+                                <x-table-data>{{ $order->total_price }}</x-table-data>
+                                <x-table-data>{{ $order->created_at }}</x-table-data>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                     @else
                     <div>Brak zamówień</div>
-                    @endif                    
+                    @endif
                 </div>
             </div>
         </div>

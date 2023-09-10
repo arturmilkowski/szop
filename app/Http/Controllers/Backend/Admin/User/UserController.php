@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Backend\Admin\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use App\Models\User;
+use App\Models\Order\Order;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): View
     {
         $collection = User::latest()->get();
 
@@ -37,7 +37,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $user): View
     {
         return view('backend.admin.user.show', ['item' => $user]);
     }
@@ -45,9 +45,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('backend.admin.user.edit', ['item' => $user]);
     }
 
     /**
@@ -61,8 +61,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user): RedirectResponse
     {
-        //
+        // $deleted = Order::where('orderable_id', $user->id)->delete();
+        $user->delete();
+
+        return redirect(route('backend.admins.users.index'))->with('message', 'Usunięto');
     }
 }

@@ -64,7 +64,7 @@ class WithRegistrationController extends Controller
         $order->comment = $validated['comment'];
 
         $user = $request->user();
-        $savedOrder = $user->orders()->save($order);        
+        $savedOrder = $user->orders()->save($order);
         $items = $cart->getItems();
         $savedOrder->items()->saveMany($items);
 

@@ -78,7 +78,8 @@
                         </tbody>
                     </table>
                     <x-btn-group>
-                        <x-link href="{{ route('backend.admins.orders.index') }}">Powrót</x-link>                        
+                        <x-link href="{{ route('backend.admins.orders.index') }}">Powrót</x-link>
+                        <x-link href="{{ url()->previous() }}">Powrót do poprzedniej strony</x-link>                        
                         <x-link href="{{ route('backend.admins.orders.edit', $item) }}">Edytuj</x-link>
                     </x-btn-group>
                 </div>

@@ -31,9 +31,10 @@
                             Usuń
                         </x-danger-button>
                     </form>
-                    <p>
-                        <x-link href="{{ route('backend.admins.orders.show', $item) }}">Powrót</x-link>
-                    </p>
+                    <x-btn-group>
+                        <x-link href="{{ route('backend.admins.orders.show', $item) }}">Powrót do zamówień</x-link>
+                        <x-link href="{{ url()->previous() }}">Powrót do poprzedniej strony</x-link>
+                    </x-btn-group>
                 </div>
             </div>
         </div>
