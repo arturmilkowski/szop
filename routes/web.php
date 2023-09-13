@@ -28,7 +28,7 @@ use App\Http\Controllers\Backend\Admin\Blog\{
     PostController as AdminPostController,
     PostImgController as AdminPostImgController
 };
-
+use App\Http\Controllers\Backend\User\OrderController as UserOrderController;
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
 Route::get('/o-firmie', [PageController::class, 'about'])->name('pages.about');
@@ -86,6 +86,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->names('backend.admins.blog.posts.images')
         ->only(['show', 'destroy'])
         ->parameters(['obrazki' => 'post']);
+
+    Route::resource('/konto/zamowienia', UserOrderController::class)
+        ->names('backend.users.orders')
+        ->only(['index', 'show'])
+        ->parameters(['zamowienia' => 'order']);
 });
 
 Route::middleware('auth')->group(function () {

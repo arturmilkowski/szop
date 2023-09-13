@@ -5,8 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\Collection;
-use App\Models\Order\{Status, Order, Item};
-use App\Models\Order\SaleDocument;
+use App\Models\Order\{SaleDocument, Status, Order, Item};
 use App\Models\Customer\Customer;
 
 class OrderTest extends TestCase

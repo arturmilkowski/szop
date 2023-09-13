@@ -1,0 +1,1 @@
+<h3 class="border-b-2 border-gray-950 mb-8 pb-2 font-semibold   ">{{ $slot }}</h3>
