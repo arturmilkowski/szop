@@ -29,6 +29,8 @@ use App\Http\Controllers\Backend\Admin\Blog\{
     PostImgController as AdminPostImgController
 };
 use App\Http\Controllers\Backend\User\OrderController as UserOrderController;
+use App\Http\Controllers\Backend\User\ProfileController as UserProfileController;
+
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
 Route::get('/o-firmie', [PageController::class, 'about'])->name('pages.about');
@@ -91,6 +93,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->names('backend.users.orders')
         ->only(['index', 'show'])
         ->parameters(['zamowienia' => 'order']);
+    Route::patch('/konto/profil', UserProfileController::class)->name('backend.users.profiles.update');
 });
 
 Route::middleware('auth')->group(function () {
