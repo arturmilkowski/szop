@@ -93,7 +93,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->names('backend.users.orders')
         ->only(['index', 'show'])
         ->parameters(['zamowienia' => 'order']);
-    Route::patch('/konto/profil', UserProfileController::class)->name('backend.users.profiles.update');
+    Route::get('/konto/profil', [UserProfileController::class, 'show'])->name('backend.users.profiles.show');
+    Route::patch('/konto/profil', [UserProfileController::class, 'update'])->name('backend.users.profiles.update');
 });
 
 Route::middleware('auth')->group(function () {
