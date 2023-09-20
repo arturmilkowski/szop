@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +10,7 @@ use App\Http\Requests\User\StoreDeliverAddress;
 use App\Models\User\DeliveryAddress;
 use App\Models\Order\Voivodeship;
 
-class DeliverAddressController extends Controller
+class DeliveryAddressController extends Controller
 {
     public function create(): View
     {

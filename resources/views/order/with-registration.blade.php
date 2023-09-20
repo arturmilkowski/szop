@@ -5,6 +5,9 @@
         <table>
             <tbody>
                 <tr>
+                    <x-table-data-inverse colspan="2">Dane osobowe i adres</x-table-data-inverse>
+                </tr>
+                <tr>
                     <x-table-data>Imię</x-table-data>
                     <x-table-data>{{ $user->name }}</x-table-data>
                 </tr>
@@ -39,9 +42,35 @@
             </tbody>
         </table>
     </div>
-    <div class="mx-2 mt-4">
+@if ($user->profile->deliveryAddress)
+    <div class="mx-2 mt-8">
         <table>
             <tbody>
+                <tr>
+                    <x-table-data-inverse colspan="2">Dostawa na adres</x-table-data-inverse>
+                </tr>
+                <tr>
+                    <x-table-data>Ulica i numer mieszkania (domu)</x-table-data>
+                    <x-table-data>{{ $user->profile->deliveryAddress->street }}</x-table-data>
+                </tr>
+                <tr>
+                    <x-table-data>Kod pocztowy i miasto</x-table-data>
+                    <x-table-data>{{ $user->profile->deliveryAddress->zip_code }} {{ $user->profile->deliveryAddress->city }}</x-table-data>
+                </tr>
+                <tr>
+                    <x-table-data>Województwo</x-table-data>
+                    <x-table-data>{{ $user->profile->deliveryAddress->voivodeship->name }}</x-table-data>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+@endif
+    <div class="mx-2 mt-8">
+        <table>
+            <tbody>
+                <tr>
+                    <x-table-data-inverse colspan="2">Dostawa</x-table-data-inverse>
+                </tr>
                 <tr>
                     <x-table-data>Dostawa</x-table-data>
                     <x-table-data>{{ $deliveryName }}</x-table-data>
@@ -61,7 +90,7 @@
             </tbody>
         </table>
     </div>
-    <div class="mx-2 mt-4">
+    <div class="mx-2 mt-8">
         <form action="{{ route('orders.with-registration.store') }}" method="POST" novalidate>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div>
@@ -72,7 +101,7 @@
                             </div>
                 @endforeach
                         </div>
-                        <div class="form-group">
+                        <div>
                             <label for="comment">Komentarz do zamówienia</label>
                             <textarea class="form-control @error('comment') is-invalid @enderror" id="comment" name="comment" maxlength="1000" rows="3" placeholder="komentarz do zamówienia">{{ old('comment') }}</textarea>
                             @error('comment')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -83,8 +112,10 @@
                             <label class="form-check-label" for="term">Akceptuję regulamin</label>
                             @error('term')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
-            <a href="{{ route('orders.checkout.index') }}">Powrót do kasy</a> | 
-            <button type="submit">Wyślij zamówienie</button>
+                        <x-btn-group>
+                            <x-link href="{{ route('orders.checkout.index') }}">Powrót do kasy</x-link>
+                            <x-primary-button type="submit">Wyślij zamówienie</x-primary-button>
+                        </x-btn-group>
         </form>
     </div>
 </x-layout>

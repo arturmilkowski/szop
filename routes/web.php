@@ -30,7 +30,7 @@ use App\Http\Controllers\Backend\Admin\Blog\{
 };
 use App\Http\Controllers\Backend\User\OrderController as UserOrderController;
 use App\Http\Controllers\Backend\User\ProfileController as UserProfileController;
-use App\Http\Controllers\Backend\User\DeliverAddressController as UserDeliverAddressController;
+use App\Http\Controllers\Backend\User\DeliveryAddressController as UserDeliveryAddressController;
 
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
 Route::get('/o-firmie', [PageController::class, 'about'])->name('pages.about');
@@ -97,12 +97,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/konto/profil', [UserProfileController::class, 'show'])->name('backend.users.profiles.show');
     Route::patch('/konto/profil', [UserProfileController::class, 'update'])->name('backend.users.profiles.update');
 
-    Route::get('/konto/profil/adres-dostawy/dodaj', [UserDeliverAddressController::class, 'create'])->name('backend.users.profiles.delivery-adresses.create');
-    Route::post('/konto/profil/adres-dostawy/dodaj', [UserDeliverAddressController::class, 'store'])->name('backend.users.profiles.delivery-adresses.store');
-    Route::get('/konto/profil/adres-dostawy', [UserDeliverAddressController::class, 'show'])->name('backend.users.profiles.delivery-adresses.show');
-    Route::get('/konto/profil/adres-dostawy/edytuj', [UserDeliverAddressController::class, 'edit'])->name('backend.users.profiles.delivery-adresses.edit');
-    Route::patch('/konto/profil/adres-dostawy', [UserDeliverAddressController::class, 'update'])->name('backend.users.profiles.delivery-adresses.update');
-    Route::delete('/konto/profil/adres-dostawy', [UserDeliverAddressController::class, 'destroy'])->name('backend.users.profiles.delivery-adresses.destroy');
+    Route::get('/konto/profil/adres-dostawy/dodaj', [UserDeliveryAddressController::class, 'create'])->name('backend.users.profiles.delivery-adresses.create');
+    Route::post('/konto/profil/adres-dostawy/dodaj', [UserDeliveryAddressController::class, 'store'])->name('backend.users.profiles.delivery-adresses.store');
+    Route::get('/konto/profil/adres-dostawy', [UserDeliveryAddressController::class, 'show'])->name('backend.users.profiles.delivery-adresses.show');
+    Route::get('/konto/profil/adres-dostawy/edytuj', [UserDeliveryAddressController::class, 'edit'])->name('backend.users.profiles.delivery-adresses.edit');
+    Route::patch('/konto/profil/adres-dostawy', [UserDeliveryAddressController::class, 'update'])->name('backend.users.profiles.delivery-adresses.update');
+    Route::delete('/konto/profil/adres-dostawy', [UserDeliveryAddressController::class, 'destroy'])->name('backend.users.profiles.delivery-adresses.destroy');
 });
 
 Route::middleware('auth')->group(function () {

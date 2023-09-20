@@ -59,10 +59,21 @@
                                         <li>{{ $item->orderable->phone ?? '' }}</li>
                                         <li>{{ $item->orderable->voivodeship->name }}</li>
                                         @endif
-                                    </ul>                                    
-                                    
+                                    </ul>
                                 </x-table-data>
                             </tr>
+                            @if ($item->orderable->profile->deliveryAddress)
+                            <tr>
+                                <x-table-data>Dostawa na inny adres</x-table-data>
+                                <x-table-data>
+                                    <ul>
+                                        <li>{{ $item->orderable->profile->deliveryAddress->street }}</li>
+                                        <li>{{ $item->orderable->profile->deliveryAddress->zip_code }} {{ $item->orderable->profile->deliveryAddress->city }}</li>
+                                        <li>{{ $item->orderable->profile->deliveryAddress->voivodeship->name }}</li>
+                                    </ul>
+                                </x-table-data>
+                            </tr>
+                            @endif
                             <tr>
                                 <x-table-data>Komentarz</x-table-data>
                                 <x-table-data>{{ $item->comment }}</x-table-data>
