@@ -1,6 +1,7 @@
 Zamówienie złożone
+------------------------------------------------------------------------------
 
-Identyfikator zamówienia: {{ $event->order->id }} | {{ $event->order->orderable_id }}
+Identyfikator zamówienia: {{ $event->order->id }}
 Data zamówienia: {{ $event->order->created_at }}
 Status zamówienia: {{ $event->order->status->name }}
 Wartość zamówienia: {{ $event->order->total_price }} zł
@@ -31,3 +32,7 @@ Dane firmy:
 {{ config('settings.company_address.street') }}
 {{ config('settings.company_address.zip_code') }} {{ config('settings.company_address.city') }}
 {{ config('settings.company_address.voivodeship') }}
+
+
+
+__

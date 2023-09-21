@@ -10,17 +10,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Order\Order;
+use App\Models\Customer\Customer;
 use App\Services\Cart;
+use App\Events\Order\PlacedInterface;
 
-class PlacedWithRegistration
+class PlacedWithoutRegistrationEvent implements PlacedInterface
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(public Cart $cart, public Order $order)
+    public function __construct(public Cart $cart, public Order $order, public Customer $customer)
     {
+        //
     }
 
     /**

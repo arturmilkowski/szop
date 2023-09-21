@@ -10,7 +10,7 @@ use App\Services\Cart;
 use App\Models\Order\SaleDocument;
 use App\Models\Order\Order;
 use App\Http\Requests\Order\StoreWithRegisterRequest;
-use App\Events\Order\PlacedWithRegistration;
+use App\Events\Order\PlacedWithRegistrationEvent;
 
 class WithRegistrationController extends Controller
 {
@@ -68,7 +68,7 @@ class WithRegistrationController extends Controller
         $items = $cart->getItems();
         $savedOrder->items()->saveMany($items);
 
-        PlacedWithRegistration::dispatch($cart, $savedOrder);
+        PlacedWithRegistrationEvent::dispatch($cart, $savedOrder);
         $cart->clear();
 
         return redirect()->route('orders.thank.with-registration');

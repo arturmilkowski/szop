@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Order\{SaleDocument, Status, Order, Item};
 use App\Models\Customer\Customer;
+use App\Models\User;
 
 class OrderTest extends TestCase
 {
@@ -48,6 +49,18 @@ class OrderTest extends TestCase
             ->create();
 
         $this->assertInstanceOf(Status::class, $order->status);
+    }
+
+    public function testOrderBelongsToUser(): void
+    {
+        $user = User::factory()->create();
+        $order = Order::factory()
+            ->for(Status::factory())
+            ->for(SaleDocument::factory())
+            ->for($user, 'orderable')
+            ->create();
+
+        $this->assertSame($user->name, $order->orderable->name);
     }
 
     public function testOrderBelongsToSaleDocument(): void

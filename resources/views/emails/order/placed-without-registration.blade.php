@@ -22,7 +22,7 @@ Wartość: {{ $item->subtotal_price }}
 @endforeach
  
 Zamawiający:
-{{ $event->customer->name }} {{ $event->customer->lastname }}
+{{ $event->customer->name }} {{ $event->customer->surname }}
 {{ $event->customer->street }}
 {{ $event->customer->zip_code }} {{ $event->customer->city }}
 {{ $event->customer->voivodeship->name }}
@@ -43,3 +43,7 @@ Dane firmy:
 {{ config('settings.company_address.street') }}
 {{ config('settings.company_address.zip_code') }} {{ config('settings.company_address.city') }}
 {{ config('settings.company_address.voivodeship') }}
+
+
+
+__

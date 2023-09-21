@@ -9,17 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
-use App\Events\Order\PlacedWithRegistrationEvent as Event;
+use App\Events\Order\PlacedInterface;
 
-class PlacedWithRegistration extends Mailable
+class Placed extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public Event $event)
+    public function __construct(public PlacedInterface $event)
     {
+        //
     }
 
     /**
@@ -27,9 +28,8 @@ class PlacedWithRegistration extends Mailable
      */
     public function envelope(): Envelope
     {
-
         return new Envelope(
-            from: new Address($this->event->order->orderable->email, $this->event->order->orderable->name . ' ' . $this->event->order->orderable->profile->surname),
+            from: new Address(env('MAIL_FROM_ADDRESS', 'hello@example.com'), env('MAIL_FROM_NAME')),
             subject: 'Zamówienie ' . $this->event->order->id,
         );
     }
@@ -40,7 +40,7 @@ class PlacedWithRegistration extends Mailable
     public function content(): Content
     {
         return new Content(
-            text: 'emails.order.placed-with-registration',
+            text: 'emails.order.placed',
         );
     }
 
