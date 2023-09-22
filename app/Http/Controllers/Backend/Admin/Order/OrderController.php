@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Order\{Status, Order};
+use App\Events\Order\ChangeOrderStatusEvent;
 
 class OrderController extends Controller
 {
@@ -15,22 +16,6 @@ class OrderController extends Controller
         $collection = Order::orderBy('created_at', 'desc')->get();
 
         return view('backend.admin.order.index', ['collection' => $collection]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     public function show(Order $order): View
@@ -48,6 +33,8 @@ class OrderController extends Controller
     public function update(Request $request, Order $order): RedirectResponse
     {
         $order->update(['status_id' => $request->status_id]);
+
+        ChangeOrderStatusEvent::dispatch($order);
 
         return redirect(route('backend.admins.orders.show', $order))->with('message', 'Zmieniono');
     }

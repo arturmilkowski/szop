@@ -32,7 +32,3 @@ Dane firmy:
 {{ config('settings.company_address.street') }}
 {{ config('settings.company_address.zip_code') }} {{ config('settings.company_address.city') }}
 {{ config('settings.company_address.voivodeship') }}
-
-
-
-__
