@@ -15,6 +15,7 @@
                                 <x-table-header>orderable_type</x-table-header>
                                 <x-table-header>Status</x-table-header>
                                 <x-table-header>Koszt</x-table-header>
+                                <x-table-header>Data złożenia</x-table-header>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,7 +29,8 @@
                                 <x-table-data>{{ $item->orderable_id }}</x-table-data>
                                 <x-table-data><small>{{ $item->orderable_type }}</small></x-table-data>
                                 <x-table-data>{{ $item->status->name }}</x-table-data>
-                                <x-table-data>{{ $item->total_price_and_delivery_cost }}</x-table-data>                                
+                                <x-table-data>{{ $item->total_price_and_delivery_cost }}</x-table-data>
+                                <x-table-data>{{ $item->created_at }}</x-table-data>
                             </tr>
 @endforeach
                         </tbody>

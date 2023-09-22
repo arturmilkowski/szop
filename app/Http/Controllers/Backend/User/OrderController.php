@@ -19,6 +19,8 @@ class OrderController extends Controller
 
     public function show(Order $order): View
     {
+        $this->authorize('view', $order);
+
         return view('backend.user.order.show', ['item' => $order]);
     }
 }

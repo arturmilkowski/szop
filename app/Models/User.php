@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany, HasOne, MorphMany};
+use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne, MorphMany};
 use App\Models\Order\Order;
 use App\Models\User\Profile;
 use App\Models\Blog\Post;
@@ -54,11 +54,16 @@ class User extends Authenticatable
 
     public function orders(): MorphMany
     {
-        return $this->morphMany(Order::class, 'orderable');
+        return $this->morphMany(Order::class, 'orderable')->orderBy('created_at', 'desc');
     }
 
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->id == 1;
     }
 }

@@ -11,6 +11,11 @@ use App\Events\Order\ChangeOrderStatusEvent;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Order::class, 'order');
+    }
+
     public function index(): View
     {
         $collection = Order::orderBy('created_at', 'desc')->get();

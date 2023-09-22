@@ -33,9 +33,11 @@
                     <x-nav-link :href="route('backend.admins.users.index')" :active="request()->routeIs('backend.admins.users.index')">
                         Użytkownicy
                     </x-nav-link>
+                    @if (Auth::user()->can('viewAny', \App\Models\Order\Order::class))                
                     <x-nav-link :href="route('backend.admins.orders.index')" :active="request()->routeIs('backend.admins.orders.index')">
                         Zamówienia
                     </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('backend.users.profiles.show')" :active="request()->routeIs('backend.users.profiles.show')">
                         Profil
                     </x-nav-link>

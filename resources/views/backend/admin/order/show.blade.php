@@ -62,7 +62,7 @@
                                     </ul>
                                 </x-table-data>
                             </tr>
-                            @if ($item->orderable->profile->deliveryAddress)
+                            @if ($item->orderable->profile?->deliveryAddress)
                             <tr>
                                 <x-table-data>Dostawa na inny adres</x-table-data>
                                 <x-table-data>
