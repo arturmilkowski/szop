@@ -16,11 +16,17 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
+        $this->authorize('view', $user->profile);
+
         return view('backend.user.profile.show', ['item' => $user]);
     }
 
     public function update(StoreProfileRequest $request): RedirectResponse
     {
+        $user = Auth::user();
+
+        $this->authorize('update', $user->profile);
+
         $validated = $request->validated();
         $request->user()->profile->update($validated);
 
