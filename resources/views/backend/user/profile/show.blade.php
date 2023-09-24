@@ -22,7 +22,7 @@
                             </tr>
                             <tr>
                                 <x-table-data>E-mail</x-table-data>
-                                <x-table-data>{{ $item->profile->email }}</x-table-data>
+                                <x-table-data>{{ $item->email }}</x-table-data>
                             </tr>
                             <tr>
                                 <x-table-data>Telefon</x-table-data>

@@ -17,7 +17,7 @@ class WithRegistrationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request, Cart $cart): RedirectResponse | View
+    public function create(Request $request, Cart $cart) //: RedirectResponse | View
     {
         if ($cart->isEmpty()) {
             return redirect()->route('pages.index');
@@ -30,6 +30,10 @@ class WithRegistrationController extends Controller
         $totalPriceAndDeliveryCost = $cart->totalPriceAndDeliveryCost($deliveryCost);
         $saleDocuments = SaleDocument::all();
         $user = $request->user();
+
+        if ($user->profile == null) {
+            return view('backend.user.profile.complete');
+        }
 
         return view('order.with-registration', [
             'cart' => $cart,
@@ -45,7 +49,7 @@ class WithRegistrationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreWithRegisterRequest $request, Cart $cart): RedirectResponse | View
+    public function store(StoreWithRegisterRequest $request, Cart $cart) //: RedirectResponse | View
     {
         if ($cart->isEmpty()) {
             return redirect()->route('pages.index');
@@ -64,6 +68,7 @@ class WithRegistrationController extends Controller
         $order->comment = $validated['comment'];
 
         $user = $request->user();
+        dd($user->profile);
         $savedOrder = $user->orders()->save($order);
         $items = $cart->getItems();
         $savedOrder->items()->saveMany($items);

@@ -95,6 +95,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->parameters(['zamowienia' => 'order']);
 
     Route::get('/konto/profil', [UserProfileController::class, 'show'])->name('backend.users.profiles.show');
+    Route::get('/konto/profil/dodaj', [UserProfileController::class, 'create'])->name('backend.users.profiles.create');
+    Route::post('/konto/profil', [UserProfileController::class, 'store'])->name('backend.users.profiles.store');
     Route::patch('/konto/profil', [UserProfileController::class, 'update'])->name('backend.users.profiles.update');
 
     Route::get('/konto/profil/adres-dostawy/dodaj', [UserDeliveryAddressController::class, 'create'])->name('backend.users.profiles.delivery-adresses.create');
