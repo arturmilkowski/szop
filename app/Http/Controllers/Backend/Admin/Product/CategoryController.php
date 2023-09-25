@@ -25,10 +25,10 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
-        $validated = $request->validated();        
+        $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['name']);
         Category::create($validated);
-        
+
         return redirect(route('backend.admins.products.categories.index'))->with('message', 'Dodano');
     }
 
@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['name']);
         $category->update($validated);
-        
+
         return redirect(route('backend.admins.products.categories.index'))->with('message', 'Zmieniono');
     }
 

@@ -15,15 +15,10 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if (Auth::user()->can('isAdmin'))
                     <x-nav-link :href="route('backend.admins.products.index')" :active="request()->routeIs('backend.admins.products.index')">
                         Produkty
                     </x-nav-link>
-                    {{-- <x-nav-link :href="route('backend.admins.products.categories.index')" :active="request()->routeIs('backend.admins.products.categories.index')">
-                        Kategorie
-                    </x-nav-link>
-                    <x-nav-link :href="route('backend.admins.products.concentrations.index')" :active="request()->routeIs('backend.admins.products.concentrations.index')">
-                        Koncentracje
-                    </x-nav-link> --}}
                     <x-nav-link :href="route('backend.admins.blog.posts.index')" :active="request()->routeIs('backend.admins.blog.posts.index')">
                         Blog
                     </x-nav-link>
@@ -33,14 +28,16 @@
                     <x-nav-link :href="route('backend.admins.users.index')" :active="request()->routeIs('backend.admins.users.index')">
                         Użytkownicy
                     </x-nav-link>
-                    <x-nav-link :href="route('backend.users.orders.index')" :active="request()->routeIs('backend.users.orders.index')">
-                        Zamówienia użytkownika
-                    </x-nav-link>
-                    @if (Auth::user()->can('viewAny', \App\Models\Order\Order::class))                
                     <x-nav-link :href="route('backend.admins.orders.index')" :active="request()->routeIs('backend.admins.orders.index')">
                         Zamówienia
                     </x-nav-link>
+                    @else
+                    @if (Auth::user()->can('viewAny', \App\Models\Order\Order::class))
+                    <x-nav-link :href="route('backend.users.orders.index')" :active="request()->routeIs('backend.users.orders.index')">
+                        Zamówienia użytkownika
+                    </x-nav-link>
                     @endif
+                    @endcan
                     <x-nav-link :href="route('backend.users.profiles.show')" :active="request()->routeIs('backend.users.profiles.show')">
                         Profil
                     </x-nav-link>

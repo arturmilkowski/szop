@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User\StoreProfileRequest;
 use App\Models\User\Profile;
 use App\Models\Order\Voivodeship;
+use App\Services\Cart;
 
 class ProfileController extends Controller
 {
@@ -44,15 +45,16 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Cart $cart)
     {
         $user = Auth::user();
+        $hasCart = !$cart->isEmpty();
 
         if ($user->profile == null) {
             return view('backend.user.profile.complete');
         }
 
-        return view('backend.user.profile.show', ['item' => $user]);
+        return view('backend.user.profile.show', ['hasCart' => $hasCart, 'item' => $user]);
     }
 
     /**

@@ -13,8 +13,6 @@ class OrderController extends Controller
     {
         $user = Auth::user();
 
-        $this->authorize('viewAny', $user);
-
         $collection = $user->orders;
 
         return view('backend.user.order.index', ['collection' => $collection]);
