@@ -5,6 +5,7 @@ namespace App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
+use Illuminate\Support\Facades\Cache;
 
 class Product extends Model
 {
@@ -41,5 +42,18 @@ class Product extends Model
     public function types(): HasMany
     {
         return $this->hasMany(Type::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::created(function () {
+            Cache::forget('products');
+        });
+        static::updated(function () {
+            Cache::forget('products');
+        });
+        static::deleted(function () {
+            Cache::forget('products');
+        });
     }
 }
