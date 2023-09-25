@@ -17,16 +17,16 @@ class ProductController extends Controller
 
     public function index(): View
     {
-        $collection = Product::all();
+        $collection = Product::latest()->get();
 
         return view('backend.admin.product.product.index', ['collection' => $collection]);
     }
 
     public function create(): View
     {
-        $brands = Brand::all();
-        $categories = Category::all();
-        $concentrations = Concentration::all();
+        $brands = Brand::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
+        $concentrations = Concentration::orderBy('name')->get();
 
         return view('backend.admin.product.product.create', [
             'brands' => $brands, 'categories' => $categories, 'concentrations' => $concentrations
@@ -61,9 +61,9 @@ class ProductController extends Controller
 
     public function edit(Product $product): View
     {
-        $brands = Brand::all();
-        $categories = Category::all();
-        $concentrations = Concentration::all();
+        $brands = Brand::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
+        $concentrations = Concentration::orderBy('name')->get();
 
         return view('backend.admin.product.product.edit', [
             'item' => $product,

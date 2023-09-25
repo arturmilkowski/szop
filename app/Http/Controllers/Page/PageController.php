@@ -11,12 +11,12 @@ class PageController extends Controller
 {
     public function index(Cart $cart): View
     {
-        $products = Product::all();
+        $products = Product::latest()->get();
 
         return view('page.page.index', [
             'products' => $products,
             'cart' => $cart
-        ]);        
+        ]);
     }
 
     public function about(): View

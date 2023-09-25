@@ -13,7 +13,7 @@ class CustomerController extends Controller
 {
     public function index(): View
     {
-        $collection = Customer::orderBy('created_at', 'desc')->get();
+        $collection = Customer::latest()->get();
 
         return view('backend.admin.customer.index', ['collection' => $collection]);
     }

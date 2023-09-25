@@ -12,7 +12,7 @@ class BrandController extends Controller
 {
     public function index(): View
     {
-        $collection = Brand::all();
+        $collection = Brand::orderBy('name')->get();
 
         return view('backend.admin.product.brand.index', ['collection' => $collection]);
     }
@@ -24,9 +24,9 @@ class BrandController extends Controller
 
     public function store(StoreBrandRequest $request): RedirectResponse
     {
-        $validated = $request->validated();        
+        $validated = $request->validated();
         Brand::create($validated);
-        
+
         return redirect(route('backend.admins.products.brands.index'))->with('message', 'Dodano');
     }
 
@@ -44,7 +44,7 @@ class BrandController extends Controller
     {
         $validated = $request->validated();
         $brand->update($validated);
-        
+
         return redirect(route('backend.admins.products.brands.index'))->with('message', 'Zmieniono');
     }
 

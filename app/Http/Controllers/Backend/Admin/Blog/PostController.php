@@ -17,7 +17,7 @@ class PostController extends Controller
 
     public function index(): View
     {
-        $collection = Post::latest()->get(); // orderBy('created_at', 'desc')->get();
+        $collection = Post::latest()->get();
 
         return view('backend.admin.blog.post.index', ['collection' => $collection]);
     }

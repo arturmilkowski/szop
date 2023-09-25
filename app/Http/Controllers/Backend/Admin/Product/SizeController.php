@@ -14,7 +14,7 @@ class SizeController extends Controller
 {
     public function index(): View
     {
-        $collection = Size::all();
+        $collection = Size::orderBy('name')->get();
 
         return view('backend.admin.product.size.index', ['collection' => $collection]);
     }
@@ -26,10 +26,10 @@ class SizeController extends Controller
 
     public function store(StoreSizeRequest $request): RedirectResponse
     {
-        $validated = $request->validated();        
+        $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['name']);
         Size::create($validated);
-        
+
         return redirect(route('backend.admins.products.sizes.index'))->with('message', 'Dodano');
     }
 
@@ -48,7 +48,7 @@ class SizeController extends Controller
         $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['name']);
         $size->update($validated);
-        
+
         return redirect(route('backend.admins.products.sizes.index'))->with('message', 'Zmieniono');
     }
 

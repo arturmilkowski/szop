@@ -10,10 +10,10 @@ use App\Models\Product\Concentration;
 use App\Http\Requests\Product\StoreConcentrationRequest;
 
 class ConcentrationController extends Controller
-{    
+{
     public function index(): View
     {
-        $collection = Concentration::all();
+        $collection = Concentration::orderBy('name')->get();
 
         return view('backend.admin.product.concentration.index', ['collection' => $collection]);
     }
@@ -25,10 +25,10 @@ class ConcentrationController extends Controller
 
     public function store(StoreConcentrationRequest $request): RedirectResponse
     {
-        $validated = $request->validated();        
+        $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['name']);
         Concentration::create($validated);
-        
+
         return redirect(route('backend.admins.products.concentrations.index'))->with('message', 'Dodano');
     }
 
@@ -47,7 +47,7 @@ class ConcentrationController extends Controller
         $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['name']);
         $concentration->update($validated);
-        
+
         return redirect(route('backend.admins.products.concentrations.index'))->with('message', 'Zmieniono');
     }
 

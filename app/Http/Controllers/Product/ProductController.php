@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function index(Cart $cart): View
     {
-        $products = Product::all();
+        $products = Product::latest()->get();
 
         return view('product.index', [
             'products' => $products,

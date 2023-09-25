@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     public function index(): View
     {
-        $collection = Category::all();
+        $collection = Category::orderBy('name')->get();
 
         return view('backend.admin.product.category.index', ['collection' => $collection]);
     }

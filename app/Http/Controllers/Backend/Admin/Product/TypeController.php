@@ -24,8 +24,8 @@ class TypeController extends Controller
 
     public function create(Product $product): View
     {
-        $sizes = Size::all();
-        $products = Product::all();
+        $sizes = Size::orderBy('name')->get();
+        $products = Product::latest()->get();
 
         return view(
             'backend.admin.product.product.type.create',
@@ -62,8 +62,8 @@ class TypeController extends Controller
 
     public function edit(Product $product, Type $type): View
     {
-        $sizes = Size::all();
-        $products = Product::all();
+        $sizes = Size::orderBy('name')->get();
+        $products = Product::latest()->get();
 
         return view('backend.admin.product.product.type.edit', [
             'sizes' => $sizes,
