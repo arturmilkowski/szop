@@ -18,7 +18,7 @@ class OrderController extends Controller
 
     public function index(): View
     {
-        $collection = Order::latest()->get();
+        $collection = Order::latest()->simplePaginate(10);
 
         return view('backend.admin.order.index', ['collection' => $collection]);
     }

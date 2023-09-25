@@ -36,6 +36,7 @@
 @endforeach
                         </tbody>
                     </table>
+                    {{ $collection->links() }}
 @else
                     <div>Brak danych</div>
 @endif

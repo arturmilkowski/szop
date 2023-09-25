@@ -9,6 +9,7 @@
                     <p>
                         <a href="{{ route('backend.admins.products.products.create') }}">Dodaj</a>
                     </p>
+@if ($collection->count())
                     <table class="w-full">
                         <thead>
                             <tr>
@@ -33,6 +34,10 @@
 @endforelse
                         </tbody>
                     </table>
+                    {{ $collection->links() }}
+@else
+                    <div>Brak danych</div>
+@endif
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ class CustomerController extends Controller
 {
     public function index(): View
     {
-        $collection = Customer::latest()->get();
+        $collection = Customer::latest()->simplePaginate(10);
 
         return view('backend.admin.customer.index', ['collection' => $collection]);
     }

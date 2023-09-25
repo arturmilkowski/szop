@@ -33,15 +33,12 @@
                                 <x-table-data>{{ $item->email }}</x-table-data>
                                 <x-table-data>{{ $item->profile->phone ?? '-'}}</x-table-data>
                                 <x-table-data>{{ $item->profile->city ?? '-'}}</x-table-data>                                
-                                <x-table-data>{{ $item->created_at }}</x-table-data>
-                                {{-- <x-table-data>{{ $item->total_price }}</x-table-data> --}}
-                                {{-- <x-table-data>{{ $item->delivery_cost }}</x-table-data> --}}
-                                {{-- <x-table-data>{{ $item->total_price_and_delivery_cost }}</x-table-data> --}}
-                                {{-- <x-table-data>{{ $item->delivery_name }}</x-table-data> --}}                                    
+                                <x-table-data>{{ $item->created_at }}</x-table-data>                         
                             </tr>
 @endforeach
                         </tbody>
                     </table>
+                    {{ $collection->links() }}
 @else
                     <div>Brak danych</div>
 @endif

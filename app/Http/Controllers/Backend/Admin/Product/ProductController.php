@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     public function index(): View
     {
-        $collection = Product::latest()->get();
+        $collection = Product::latest()->simplePaginate(10);
 
         return view('backend.admin.product.product.index', ['collection' => $collection]);
     }

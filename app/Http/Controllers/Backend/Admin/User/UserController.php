@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        $collection = User::latest()->get();
+        $collection = User::latest()->simplePaginate(10);
 
         return view('backend.admin.user.index', ['collection' => $collection]);
     }

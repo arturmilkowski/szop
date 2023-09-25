@@ -17,7 +17,7 @@ class PostController extends Controller
 
     public function index(): View
     {
-        $collection = Post::latest()->get();
+        $collection = Post::latest()->simplePaginate(10);
 
         return view('backend.admin.blog.post.index', ['collection' => $collection]);
     }
