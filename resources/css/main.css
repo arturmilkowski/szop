@@ -5,3 +5,7 @@
 .active {
     color: red;
 }
+
+.human {
+    visibility: hidden;
+}

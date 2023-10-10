@@ -3,9 +3,9 @@
 @if ($cart->itemsCount())
     <x-cart :cart="$cart" />
 @endif
-    <h1>Produkty</h1>
+    {{-- <h1>Produkty</h1> --}}
 @forelse ($products as $product)
-    <div class="flex mt-20 border-t-[1px] border-b-[1px] border-black">
+    <div class="flex my-20 border-t-[1px] border-b-[1px] border-black">
       <x-product :product="$product" />
     </div>
 @empty

@@ -32,9 +32,11 @@ use App\Http\Controllers\Backend\User\OrderController as UserOrderController;
 use App\Http\Controllers\Backend\User\ProfileController as UserProfileController;
 use App\Http\Controllers\Backend\User\DeliveryAddressController as UserDeliveryAddressController;
 
+
 Route::get('/', [PageController::class, 'index'])->name('pages.index');
 Route::get('/o-firmie', [PageController::class, 'about'])->name('pages.about');
 Route::get('/kontakt', [ContactController::class, 'create'])->name('pages.contacts.create');
+Route::get('/dziekujemy-za-kontakt', [ContactController::class, 'thank'])->name('pages.contacts.thank');
 Route::post('/kontakt/wyślij', [ContactController::class, 'store'])->name('pages.contacts.store');
 
 Route::get('/produkty/{product:slug}', [ProductController::class, 'show'])->name('products.show');

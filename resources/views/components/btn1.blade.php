@@ -1,0 +1,1 @@
+<button class="border-[1px] border-gray-400 px-3 py-1 hover:bg-gray-100" type="submit">{{ $slot }}</button>

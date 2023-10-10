@@ -4,26 +4,31 @@
     <x-cart :cart="$cart" />
 @endif
     @if($product->img)
-    <img src="{{ asset('storage/images/products') . '/' . $product->img }}" class="img" alt="{{ $product->name }}">
+    <img class="my-20 border-t-[1px] border-b-[1px] border-black" src="{{ asset('storage/images/products') . '/' . $product->img }}" alt="{{ $product->name }}">
     @endif
-    <h1 class="px-2 py-16 border-b-[1px] border-gray-950">{{ $product->name }}</h1>
-    <h2 class="px-2 py-16 border-b-[1px] border-gray-950">{{ $product->category->name }} {{ $product->concentration->name }}</h2>
-    <div class="px-2 py-16 border-b-[1px] border-gray-950">{!! $product->description !!}</div>
-    
-    <div class="flex">
+    <div class="flex items-stretch mx-2 mt-12 gap-8">
+      <div class="w-1/2 border-t-[1px] border-black pt-4">
+        <h1 class="text-sm sm:text-sm md:text-lg lg:text-xl xl:text-2xl">{{ $product->name }}</h1>
+        <h2 class="text-xs sm:text-sm md:text-base lg:text-lg">{{ $product->category->name }} {{ $product->concentration->name }}</h2>
+      </div>
+      <div class="w-1/2 border-t-[1px] border-black pt-4">
+        <div class="text-xs sm:text-sm md:text-sm lg:text-sm">{!! $product->description !!}</div>
+      </div>
+    </div>
+    <div class="flex mx-2 mt-12 gap-8">
       @forelse ($product->types as $type)
-      <div class="w-6/12">
-        {{ $type }}
+      <div class="w-1/2 border-t-[1px] border-black pt-4">
+        {{-- $type --}}
         @if($type->img)
-        <img src="{{ asset('storage/images/products/types') . '/' . $type->img }}" class="img" alt="{{ $type->name }}">
+        {{-- <img src="{{ asset('storage/images/products/types') . '/' . $type->img }}" alt="{{ $type->name }}"> --}}
         @endif
-        <div>{{ $type->name }}</div>
+        <div class="text-sm sm:text-sm md:text-lg lg:text-xl xl:text-2xl">{{ $type->name }}</div>
         @if ($type->description)
-        <div>{{ $type->description }}</div>
+        <div class="text-xs sm:text-sm md:text-sm lg:text-sm"">{{ $type->description }}</div>
         @endif
-        <div>{{ $type->price }} zł</div>
+        <div class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">{{ $type->price }} zł</div>
         @if ($type->quantity > 0)
-        <form action="{{ route('cart.store', [$type->id]) }}" method="POST">
+        <form class="mt-4" action="{{ route('cart.store', [$type->id]) }}" method="POST">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <x-btn>Do koszyka</x-btn>
         </form>
@@ -36,8 +41,8 @@
       @endforelse
     </div>
 
-    <p>
-      <x-link href="{{ route('pages.index') }}" class="mr-4" title="Powrót do strony głównej">Powrót do strony głównej</x-link>
+    <p class="flex gap-x-4 mx-2 pt-24">
+      <x-link href="{{ route('pages.index') }}" title="Powrót do strony głównej">Powrót do strony głównej</x-link>
       <x-link href="{{ route('products.index') }}" title="Powrót do strony produktów">Powrót do strony produktów</x-link>
     </p>
   </x-layout>
