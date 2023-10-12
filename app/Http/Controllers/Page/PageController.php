@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Product\Product;
+use App\Models\Blog\Post;
 use App\Services\Cart;
 
 class PageController extends Controller
@@ -16,9 +17,13 @@ class PageController extends Controller
         $products = Cache::remember('products', $seconds, function () {
             return Product::latest()->get();
         });
+        $posts = Cache::remember('posts', $seconds, function () {
+            return Post::latest()->get();
+        });
 
         return view('page.page.index', [
             'products' => $products,
+            'posts' => $posts,
             'cart' => $cart
         ]);
     }

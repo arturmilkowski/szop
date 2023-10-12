@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Page\{PageController, ContactController};
+use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Cart\{
     StoreController as CartStoreController,
@@ -38,6 +39,9 @@ Route::get('/o-firmie', [PageController::class, 'about'])->name('pages.about');
 Route::get('/kontakt', [ContactController::class, 'create'])->name('pages.contacts.create');
 Route::get('/dziekujemy-za-kontakt', [ContactController::class, 'thank'])->name('pages.contacts.thank');
 Route::post('/kontakt/wyślij', [ContactController::class, 'store'])->name('pages.contacts.store');
+
+Route::get('/blog', [PostController::class, 'index'])->name('blog.posts.index');
+Route::get('/blog/{post}', [PostController::class, 'show'])->name('blog.posts.show');
 
 Route::get('/produkty/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/produkty', [ProductController::class, 'index'])->name('products.index');
