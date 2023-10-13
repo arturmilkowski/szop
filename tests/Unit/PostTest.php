@@ -21,7 +21,6 @@ class PostTest extends TestCase
         $user = User::factory()->create();
         $post = Post::factory()->for($user)->create();
 
-        $this->assertInstanceOf(Post::class, $post);
         $this->assertDatabaseHas('posts', [
             'user_id' => $user->id,
             'slug' => $post->slug,
@@ -47,5 +46,13 @@ class PostTest extends TestCase
         $comments = $post->comments;
 
         $this->assertInstanceOf(Collection::class, $comments);
+    }
+
+    public function testPostBelongsToManyTags(): void
+    {
+        $user = User::factory()->create();
+        $post = Post::factory()->for($user)->create();
+
+        $this->assertInstanceOf(Collection::class, $post->tags);
     }
 }

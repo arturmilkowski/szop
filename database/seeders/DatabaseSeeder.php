@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             SizeSeeder::class,
             TypeSeeder::class,
             PostSeeder::class,
+            TagSeeder::class,
             CommentSeeder::class,
             ReplySeeder::class,
             SaleDocumentSeeder::class,
